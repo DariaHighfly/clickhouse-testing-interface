@@ -7,7 +7,10 @@ module.exports = {
             { hid: 'description', name: 'description', content: 'Nuxt.js project' },
         ]
     },
-    mode: 'universal',
+    router: {
+        base: './',
+        mode: 'hash'
+    },
     /*
     ** Customize the progress bar color
     */

@@ -1,8 +1,6 @@
 <template>
     <div class="columnChart">
-        <!--<no-ssr>-->
         <highcharts :options="columnChartOptions"></highcharts>
-        <!--</no-ssr>-->
     </div>
 </template>
 

@@ -1,9 +1,6 @@
 <template>
     <div class="pie-chart">
-        <!--<no-ssr>-->
-            <!--<vue-highcharts :options="pieChartOptions"></vue-highcharts>-->
-        <!--</no-ssr>-->
-        <highcharts :options="pieChartOptions" ref="lineCharts"></highcharts>
+        <highcharts :options="pieChartOptions"></highcharts>
         <div class="pie-chart__description">
             <div class="pie-chart__description-box">
                 <p class="pie-chart__description-box__number">{{this.allTests}}</p>
