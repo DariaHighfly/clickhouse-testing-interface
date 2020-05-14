@@ -1,4 +1,4 @@
-import jsonFile from "../static/test_data/json_to_send";
+import main_json from "../static/test_data/commit/json_to_send";
 import commit_json_1 from "../static/test_data/commit_1/json_to_send";
 import commit_json_2 from "../static/test_data/commit_2/json_to_send";
 import commit_json_3 from "../static/test_data/commit_3/json_to_send";
@@ -17,16 +17,17 @@ import commit_json_15 from "../static/test_data/commit_15/json_to_send";
 
 export const state = () => ({
     currentCommitInfo: {
-        commits: jsonFile.commits,
-        changes: jsonFile.changes,
-        unstableQueries: jsonFile.unstableQueries,
-        runErrors: jsonFile.runErrors,
-        skipped: jsonFile.skipped,
-        badTests: jsonFile.badTests,
-        testTimes: jsonFile.testTimes,
-        slowOnClient: jsonFile.slowOnClient,
-        allQueries: jsonFile.allQueries.length,
-        reportErrors: jsonFile.reportErrors
+        commits: main_json.commits,
+        changes: main_json.changes,
+        unstableQueries: main_json.unstableQueries,
+        runErrors: main_json.runErrors,
+        skipped: main_json.skipped,
+        badTests: main_json.badTests,
+        testTimes: main_json.testTimes,
+        slowOnClient: main_json.slowOnClient,
+        allQueries: main_json.allQueries,
+        timePerformance: main_json.timePerformance,
+        reportErrors: main_json.reportErrors
     },
     commitsHistory: [
         commit_json_1,
@@ -80,6 +81,9 @@ export const getters = {
     },
     getAllQueries: (state) => {
         return state.currentCommitInfo.allQueries;
+    },
+    getTimePerformance: (state) => {
+        return state.currentCommitInfo.timePerformance;
     },
     getDataErrors: (state) => {
         return state.currentCommitInfo.reportErrors;

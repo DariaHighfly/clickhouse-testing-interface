@@ -1,21 +1,27 @@
 <template>
-    <div>
-        <div class="all-tests">
+    <div class="all-tests">
+        <div class="row">
             <PieChart
-                    :commitName="commits.rightCommit.commit"
-                    :allTests="allQueries"
-                    :failTests="runErrors.length"
-                    :skippedTests="skippedTests.length">
+                :commitName="commits.rightCommit.commit"
+                :allTests="allQueries"
+                :failTests="runErrors.length"
+                :skippedTests="skippedTests.length">
             </PieChart>
             <ColumnChart
-                    :allTestsHistory="allTestsHistory">
+                :allTestsHistory="allTestsHistory">
             </ColumnChart>
+        </div>
+        <div class="row">
+            <TimePerformanceColumnChart
+                :timePerformance="timePerformance">
+            </TimePerformanceColumnChart>
         </div>
     </div>
 </template>
 
 <script>
 import ColumnChart from "./ColumnChart";
+import TimePerformanceColumnChart from "./TimePerformanceColumnChart"
 import PieChart from "./PieChart";
 import {mapGetters} from "vuex";
 
@@ -23,7 +29,8 @@ export default {
     name: "StatisticsCharts",
     components: {
         ColumnChart,
-        PieChart
+        PieChart,
+        TimePerformanceColumnChart
     },
     computed: {
         ...mapGetters({
@@ -36,6 +43,7 @@ export default {
             testTimes: "tests/getTestTimes",
             slowOnClientTests: "tests/getSlowOnClientTests",
             allQueries: "tests/getAllQueries",
+            timePerformance: "tests/getTimePerformance",
             commitsHistory: "tests/getCommitsHistory",
         }),
         allTestsHistory()  {
@@ -59,6 +67,12 @@ export default {
 
 <style scoped>
     .all-tests {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+    .row {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
