@@ -39,10 +39,10 @@
                 let avgTime = [];
                 for (let key in this.timePerformance) {
                     // Average of time difference
-                    let currentAvgTime = this.timePerformance[key].reduce(
+                    let currentAvgTime = this.timePerformance[key].difference.reduce(
                         (previousValue, currentValue) => {
                             return previousValue += currentValue;
-                        }) / this.timePerformance[key].length;
+                        }) / this.timePerformance[key].difference.length;
                     if (Math.abs(currentAvgTime) > this.minimumThreshold) {
                         avgTime.push({name: key, avgTime: currentAvgTime});
                     }
@@ -129,7 +129,7 @@
     .columnChart {
         display: flex;
         flex-direction: column;
-        min-width: 600px;
+        min-width: 900px;
     }
     .columnChart__title {
         font-size: 16px;

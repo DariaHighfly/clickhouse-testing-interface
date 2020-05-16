@@ -42,6 +42,9 @@
 
         },
         computed: {
+            sum() {
+                return this.allTests + this.failTests + this.skippedTests;
+            },
             series() {
                 let columnHeightFailed = (this.failTests !== 0) ? Math.max(this.failTests, 15) : 0;
                 let columnHeightSkipped = (this.skippedTests !== 0) ? Math.max(this.skippedTests, 15) : 0;
@@ -49,6 +52,9 @@
                 return [{
                     name: 'Results',
                     colorByPoint: true,
+                    value: this.failTests,
+                    innerSize: '70%',
+                    zMin: 0,
                     data: [
                         {
                             name: 'Failed tests',
@@ -78,10 +84,13 @@
                         enabled: false
                     },
                     title: {
-                        text: "RESULTS OF ALL TESTS OF COMMIT " + this.commitName,
+                        text: " TOTAL TESTS:<br>" + this.sum,
                         style: {
-                            fontSize: "16px",
-                        }
+                            fontSize: "20px",
+                        },
+                        align: 'center',
+                        verticalAlign: 'middle',
+                        y: 2
                     },
                     chart: {
                         type: 'pie',

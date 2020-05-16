@@ -16,6 +16,12 @@
                 :timePerformance="timePerformance">
             </TimePerformanceColumnChart>
         </div>
+        <div class="row">
+            <AllTestsTimeSpline
+                :timePerformance="timePerformance"
+                :allTestsHistory="allTestsHistory">
+            </AllTestsTimeSpline>
+        </div>
     </div>
 </template>
 
@@ -23,6 +29,7 @@
 import ColumnChart from "./ColumnChart";
 import TimePerformanceColumnChart from "./TimePerformanceColumnChart"
 import PieChart from "./PieChart";
+import AllTestsTimeSpline from "./AllTestsTimeSpline"
 import {mapGetters} from "vuex";
 
 export default {
@@ -30,7 +37,8 @@ export default {
     components: {
         ColumnChart,
         PieChart,
-        TimePerformanceColumnChart
+        TimePerformanceColumnChart,
+        AllTestsTimeSpline
     },
     computed: {
         ...mapGetters({
@@ -54,6 +62,7 @@ export default {
                     allTests: elem.allQueries,
                     failTests: elem.runErrors.length,
                     skippedTests: elem.skipped.length,
+                    timePerformance: elem.timePerformance
                 });
             });
             commitsAllTests.sort((a,b) => {
