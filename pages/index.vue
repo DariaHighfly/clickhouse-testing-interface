@@ -2,7 +2,9 @@
     <div id="app">
         <Menu></Menu>
         <div>
-            <Navbar/>
+            <div class="navbar">
+                <Navbar/>
+            </div>
             <div class="box">
                 <StatisticsCharts/>
             </div>
@@ -51,11 +53,17 @@
         color: #2c3e50;
         display: flex;
         flex-direction: row;
+        width: 100%;
+        background-color: #f4f6f8;
+    }
+    .navbar {
+        width: 100vw;
+        color: black;
+        padding: 10px 0 15px 0;
+        background-color: #FFFFFF;
     }
     .box {
-        width: 100%;
         padding: 0 20px 0 20px;
-        background-color: #f4f6f8;
         overflow: scroll;
     }
 </style>

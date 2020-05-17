@@ -72,7 +72,7 @@
                     },
                     chart: {
                         type: 'column',
-                        height: '75%',
+                        height: '60%',
                         width: 700
                     },
                     exporting: {

@@ -1,12 +1,19 @@
 <template>
     <div class="all-tests">
         <div class="row">
-            <PieChart
-                :commitName="commits.rightCommit.commit"
-                :allTests="allQueries"
-                :failTests="runErrors.length"
-                :skippedTests="skippedTests.length">
-            </PieChart>
+            <div class="column">
+                <PieChart
+                    :commitName="commits.rightCommit.commit"
+                    :allTests="allQueries"
+                    :failTests="runErrors.length"
+                    :skippedTests="skippedTests.length">
+                </PieChart>
+                <TestStatistics
+                    :allTests="allQueries"
+                    :failTests="runErrors.length"
+                    :skippedTests="skippedTests.length">
+                </TestStatistics>
+            </div>
             <HistoryTestsColumnChart
                 :allTestsHistory="allTestsHistory">
             </HistoryTestsColumnChart>
@@ -34,6 +41,7 @@
 import HistoryTestsColumnChart from "./HistoryTestsColumnChart"
 import TimePerformanceColumnChart from "./TimePerformanceColumnChart"
 import PieChart from "./PieChart"
+import TestStatistics from "./TestStatistics"
 import AllTestsTimeSpline from "./AllTestsTimeSpline"
 import UnstableTestsChart from "./UnstableTestsChart"
 import {mapGetters} from "vuex";
@@ -43,6 +51,7 @@ export default {
     components: {
         HistoryTestsColumnChart,
         PieChart,
+        TestStatistics,
         TimePerformanceColumnChart,
         AllTestsTimeSpline,
         UnstableTestsChart
@@ -87,10 +96,17 @@ export default {
         flex-direction: column;
         flex-wrap: wrap;
         align-items: flex-start;
+        margin-bottom: 40px;
     }
     .row {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+    .column {
+        display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
         align-items: flex-start;
     }

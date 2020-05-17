@@ -127,7 +127,7 @@
         flex-direction: column;
         justify-content: center;
         background-color: #FFFFFF;
-        margin: 20px 40px 20px 0;
+        margin: 20px 40px 0 0;
         padding: 20px 12px 5px 10px;
         border-radius: 4px;
         -webkit-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);

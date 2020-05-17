@@ -1,20 +1,6 @@
 <template>
     <div class="pie-chart">
         <highcharts :options="pieChartOptions"></highcharts>
-        <div class="pie-chart__description">
-            <div class="pie-chart__description-box">
-                <p class="pie-chart__description-box__number">{{this.allTests}}</p>
-                <p class="pie-chart__description-box__text">Tests <br/> passed</p>
-            </div>
-            <div class="pie-chart__description-box">
-                <p class="pie-chart__description-box__number">{{this.failTests}}</p>
-                <p class="pie-chart__description-box__text">Tests <br/> failed</p>
-            </div>
-            <div class="pie-chart__description-box">
-                <p class="pie-chart__description-box__number">{{this.skippedTests}}</p>
-                <p class="pie-chart__description-box__text">Tests <br/> skipped</p>
-            </div>
-        </div>
     </div>
 
 </template>

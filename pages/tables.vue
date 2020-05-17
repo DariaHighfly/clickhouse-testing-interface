@@ -59,11 +59,11 @@
         color: #2c3e50;
         display: flex;
         flex-direction: row;
+        width: 100%;
+        background-color: #f4f6f8;
     }
     .box {
-        width: 100%;
         padding: 0 20px 0 20px;
-        background-color: #f4f6f8;
         overflow: scroll;
     }
 </style>
