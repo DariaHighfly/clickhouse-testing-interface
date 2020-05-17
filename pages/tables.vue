@@ -1,8 +1,12 @@
 <template>
     <div id="app">
-        <Menu></Menu>
+        <Menu
+            :selected="selected">
+        </Menu>
         <div>
-            <Navbar/>
+            <div class="navbar">
+                <Navbar/>
+            </div>
             <div class="box">
                 <StatisticsAllTables
                     :commits="commits"
@@ -32,6 +36,11 @@
             Navbar,
             StatisticsAllTables
         },
+        data() {
+            return {
+                selected: "tables"
+            }
+        },
         computed: {
             ...mapGetters({
                 commits: "tests/getCommits",
@@ -50,6 +59,8 @@
 <style scoped>
     body {
         margin: 0;
+        width: 100%;
+        background-color: #f4f6f8;
     }
     #app {
         font-family: "Yandex Sans Display", sans-serif;
@@ -59,8 +70,11 @@
         color: #2c3e50;
         display: flex;
         flex-direction: row;
+    }
+    .navbar {
         width: 100%;
-        background-color: #f4f6f8;
+        padding: 10px 0 15px 0;
+        background-color: #FFFFFF;
     }
     .box {
         padding: 0 20px 0 20px;

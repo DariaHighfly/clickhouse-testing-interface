@@ -1,10 +1,10 @@
 <template>
     <div id="app">
-        <Menu></Menu>
+        <Menu
+            :selected="selected">
+        </Menu>
         <div>
-            <div class="navbar">
-                <Navbar/>
-            </div>
+            <Navbar/>
             <div class="box">
                 <StatisticsCharts/>
             </div>
@@ -26,6 +26,11 @@
             StatisticsCharts,
             Menu
         },
+        data() {
+            return {
+                selected: "dashboard"
+            }
+        },
         computed: {
             ...mapGetters({
                 commits: "tests/getCommits",
@@ -44,6 +49,8 @@
 <style>
     body {
         margin: 0;
+        width: 100%;
+        background-color: #f4f6f8;
     }
     #app {
         font-family: "Yandex Sans Display", sans-serif;
@@ -57,10 +64,8 @@
         background-color: #f4f6f8;
     }
     .navbar {
-        width: 100vw;
+        width: 100%;
         color: black;
-        padding: 10px 0 15px 0;
-        background-color: #FFFFFF;
     }
     .box {
         padding: 0 20px 0 20px;
