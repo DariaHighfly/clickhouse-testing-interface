@@ -1,5 +1,5 @@
 <template>
-    <div class="columnChart">
+    <div class="column-chart">
         <highcharts :options="columnChartOptions"></highcharts>
     </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
 
     export default {
-        name: "ColumnChart",
+        name: "HistoryTestsColumnChart",
         props: {
             allTestsHistory: {
                 type: Array,
@@ -73,6 +73,7 @@
                     chart: {
                         type: 'column',
                         height: '75%',
+                        width: 700
                     },
                     exporting: {
                         enabled: false
@@ -123,4 +124,13 @@
 </script>
 
 <style scoped>
+    .column-chart {
+        background-color: #FFFFFF;
+        margin: 20px 0px 0 0;
+        padding: 15px 15px 5px 8px;
+        border-radius: 4px;
+        -webkit-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        -moz-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+    }
 </style>

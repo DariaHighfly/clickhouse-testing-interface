@@ -86,7 +86,7 @@
                     title: {
                         text: " TOTAL TESTS:<br>" + this.sum,
                         style: {
-                            fontSize: "20px",
+                            fontSize: "17px",
                         },
                         align: 'center',
                         verticalAlign: 'middle',
@@ -94,8 +94,8 @@
                     },
                     chart: {
                         type: 'pie',
-                        height: '75%',
-                        width: 440
+                        height: '70%',
+                        width: 395
                     },
                     exporting: {
                         enabled: false
@@ -135,7 +135,13 @@
         display: flex;
         flex-direction: row;
         align-items: flex-start;
-        margin-right: 100px;
+        background-color: #FFFFFF;
+        margin: 20px 20px 0 0;
+        padding: 10px 20px 5px 0;
+        border-radius: 4px;
+        -webkit-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        -moz-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
     }
     .pie-chart__description {
         display: flex;
@@ -151,6 +157,7 @@
         background-color: #f8cd46;
         padding: 10px 12px 10px 12px;
         margin-bottom: 10px;
+        border-radius: 2px;
         transform: scale(1);
         transition: 0.15s all ease;
     }

@@ -84,7 +84,8 @@
                     },
                     chart: {
                         type: 'column',
-                        height: '75%',
+                        height: '70%',
+                        width: 700
                     },
                     tooltip: {
                         shared: true
@@ -125,7 +126,13 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        min-width: 900px;
+        background-color: #FFFFFF;
+        margin: 20px 40px 20px 0;
+        padding: 20px 12px 5px 10px;
+        border-radius: 4px;
+        -webkit-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        -moz-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
     }
     .unstableTestsChart__title {
         font-size: 16px;

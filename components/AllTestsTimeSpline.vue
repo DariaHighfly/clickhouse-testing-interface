@@ -113,6 +113,7 @@
                     },
                     chart: {
                         height: '75%',
+                        width: 700
                     },
                     exporting: {
                         enabled: false
@@ -157,6 +158,12 @@
 
 <style scoped>
     .splineChart {
-        min-width: 900px;
+        background-color: #FFFFFF;
+        margin: 20px 100px 0 0;
+        padding: 15px 15px 5px 8px;
+        border-radius: 4px;
+        -webkit-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        -moz-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
     }
 </style>

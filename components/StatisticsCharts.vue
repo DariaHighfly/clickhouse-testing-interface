@@ -7,9 +7,9 @@
                 :failTests="runErrors.length"
                 :skippedTests="skippedTests.length">
             </PieChart>
-            <ColumnChart
+            <HistoryTestsColumnChart
                 :allTestsHistory="allTestsHistory">
-            </ColumnChart>
+            </HistoryTestsColumnChart>
         </div>
         <div class="row">
             <TimePerformanceColumnChart
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import ColumnChart from "./ColumnChart"
+import HistoryTestsColumnChart from "./HistoryTestsColumnChart"
 import TimePerformanceColumnChart from "./TimePerformanceColumnChart"
 import PieChart from "./PieChart"
 import AllTestsTimeSpline from "./AllTestsTimeSpline"
@@ -41,7 +41,7 @@ import {mapGetters} from "vuex";
 export default {
     name: "StatisticsCharts",
     components: {
-        ColumnChart,
+        HistoryTestsColumnChart,
         PieChart,
         TimePerformanceColumnChart,
         AllTestsTimeSpline,
@@ -93,6 +93,5 @@ export default {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: flex-start;
-        margin-bottom: 20px;
     }
 </style>

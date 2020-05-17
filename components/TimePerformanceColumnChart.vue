@@ -1,6 +1,6 @@
 <template>
-    <div class="columnChart">
-        <p class="columnChart__title">TIME PERFORMANCE OF CURRENT COMMIT</p>
+    <div class="column-chart">
+        <p class="column-chart__title">TIME PERFORMANCE OF CURRENT COMMIT</p>
         <div class="params">
             <p class="params__title">
                 Minimum Threshold (abs):
@@ -85,7 +85,8 @@
                     },
                     chart: {
                         type: 'column',
-                        height: '75%',
+                        height: '65%',
+                        width: 700
                     },
                     exporting: {
                         enabled: false
@@ -145,13 +146,19 @@
 </script>
 
 <style scoped>
-    .columnChart {
+    .column-chart {
         display: flex;
         flex-direction: column;
-        min-width: 900px;
+        background-color: #FFFFFF;
+        margin: 20px 40px 0px 0;
+        padding: 20px 12px 5px 10px;
+        border-radius: 4px;
+        -webkit-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        -moz-box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
+        box-shadow: 6px 7px 13px 2px rgba(0,0,0,0.11);
     }
-    .columnChart__title {
-        font-size: 16px;
+    .column-chart__title {
+        font-size: 17px;
         text-align: center;
         margin: 0;
     }
@@ -159,7 +166,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin: 30px 0 30px 20px;
+        margin: 5px 0 30px 20px;
     }
     .params__input-box {
         display: flex;

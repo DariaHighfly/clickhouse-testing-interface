@@ -4,7 +4,16 @@
         <div>
             <Navbar/>
             <div class="box">
-                <StatisticsCharts/>
+                <StatisticsAllTables
+                    :commits="commits"
+                    :changes="changes"
+                    :unstableQueries="unstableQueries"
+                    :runErrors="runErrors"
+                    :skippedTests="skippedTests"
+                    :badTests="badTests"
+                    :testTimes="testTimes"
+                    :slowOnClientTests="slowOnClientTests">
+                </StatisticsAllTables>
             </div>
         </div>
     </div>
@@ -12,17 +21,16 @@
 
 <script>
     import { mapGetters } from "vuex";
-
     import Menu from "../components/Menu"
     import Navbar from "../components/Navbar"
-    import StatisticsCharts from "../components/StatisticsCharts"
+    import StatisticsAllTables from "~/components/StatisticsAllTables"
 
     export default {
-        name: 'app',
+        name: "tables",
         components: {
+            Menu,
             Navbar,
-            StatisticsCharts,
-            Menu
+            StatisticsAllTables
         },
         computed: {
             ...mapGetters({
@@ -39,7 +47,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     body {
         margin: 0;
     }
