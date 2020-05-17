@@ -6,114 +6,120 @@
 
 <script>
 
-export default {
-    name: "ColumnChart",
-    props: {
-        allTestsHistory: {
-            type: Array,
-            default: []
-        }
-    },
-    computed: {
-        commitsDates() {
-            let dates = [];
-            this.allTestsHistory.map(elem => {
-                let date = new Date(elem.commit.date);
-                const dtf = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' });
-                const [{ value: mo },,{ value: da },,{ value: ye }] = dtf.formatToParts(date);
-                dates.push(`${da}-${mo}-${ye}`);
-            });
-            return dates;
+    export default {
+        name: "ColumnChart",
+        props: {
+            allTestsHistory: {
+                type: Array,
+                default: []
+            }
         },
-        series() {
-            let allPassedTestsForChart = [];
-            let allFailedTestsForChart = [];
-            let allSkippedTestsForChart = [];
-            this.allTestsHistory.map(elem => {
-                (elem.allTests !== 0) ?
-                    allPassedTestsForChart.push({y: Math.max(elem.allTests, 100), value: elem.allTests}) :
-                    allPassedTestsForChart.push({y: 0, value: elem.allTests});
-                (elem.failTests !== 0) ?
-                    allFailedTestsForChart.push({y: Math.max(elem.failTests, 100), value: elem.failTests}) :
-                    allFailedTestsForChart.push({y: 0, value: elem.failTests});
-                (elem.skippedTests !== 0) ?
-                    allSkippedTestsForChart.push({y: Math.max(elem.skippedTests, 100), value: elem.skippedTests}) :
-                    allSkippedTestsForChart.push({y: 0, value: elem.skippedTests});
-            });
-            return [
-                {
-                    name: "Passed tests",
-                    data: allPassedTestsForChart,
-                    color: "#98c807"
-                },
-                {
-                    name: "Failed tests",
-                    data: allFailedTestsForChart,
-                    color: "#d13814"
-                },
-                {
-                    name: "Skipped tests",
-                    data: allSkippedTestsForChart,
-                    color: "#edd812"
-                },
-            ]
-        },
-        columnChartOptions() {
-            return {
-                //  credits - to hide licence logo
-                credits: {
-                    enabled: false
-                },
-                title: {
-                    text: "HISTORY OF ALL COMMITS",
-                    style: {
-                        fontSize: "16px",
-                    }
-                },
-                chart: {
-                    type: 'column',
-                    height: '75%',
-                },
-                exporting: {
-                    enabled: false
-                },
-                xAxis: {
-                    categories: this.commitsDates
-                },
-                yAxis: {
-                    min: 0,
-                    labels: {
-                        formatter: function() {
-                            return this.axis.defaultLabelFormatter.call(this);
+        computed: {
+            commitsDates() {
+                let dates = [];
+                this.allTestsHistory.map(elem => {
+                    let date = new Date(elem.commit.date);
+                    const dtf = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: '2-digit' });
+                    const [{ value: mo },,{ value: da },,{ value: ye }] = dtf.formatToParts(date);
+                    dates.push(`${da}-${mo}-${ye}`);
+                });
+                return dates;
+            },
+            series() {
+                let allPassedTestsForChart = [];
+                let allFailedTestsForChart = [];
+                let allSkippedTestsForChart = [];
+                this.allTestsHistory.map(elem => {
+                    (elem.allTests !== 0) ?
+                        allPassedTestsForChart.push({y: Math.max(elem.allTests, 100), value: elem.allTests}) :
+                        allPassedTestsForChart.push({y: 0, value: elem.allTests});
+                    (elem.failTests !== 0) ?
+                        allFailedTestsForChart.push({y: Math.max(elem.failTests, 100), value: elem.failTests}) :
+                        allFailedTestsForChart.push({y: 0, value: elem.failTests});
+                    (elem.skippedTests !== 0) ?
+                        allSkippedTestsForChart.push({y: Math.max(elem.skippedTests, 100), value: elem.skippedTests}) :
+                        allSkippedTestsForChart.push({y: 0, value: elem.skippedTests});
+                });
+                return [
+                    {
+                        name: "Passed tests",
+                        data: allPassedTestsForChart,
+                        color: "#98c807"
+                    },
+                    {
+                        name: "Failed tests",
+                        data: allFailedTestsForChart,
+                        color: "#d13814"
+                    },
+                    {
+                        name: "Skipped tests",
+                        data: allSkippedTestsForChart,
+                        color: "#edd812"
+                    },
+                ]
+            },
+            columnChartOptions() {
+                return {
+                    //  credits - to hide licence logo
+                    credits: {
+                        enabled: false
+                    },
+                    title: {
+                        text: "HISTORY OF ALL COMMITS",
+                        style: {
+                            fontSize: "16px",
                         }
                     },
-                },
-                tooltip: {
-                    headerFormat: 'Commit from <b>{point.x}</b><br/>',
-                    pointFormat: '{series.name}: <b>{point.value} tests</b>'
-                },
-                plotOptions: {
-                    column: {
-                        stacking: 'normal',
-                        pointPadding: 0.1,
-                        groupPadding: 0,
-                        dataLabels: {
-                            enabled: true,
-                            format: '{point.value}',
+                    chart: {
+                        type: 'column',
+                        height: '75%',
+                    },
+                    exporting: {
+                        enabled: false
+                    },
+                    xAxis: {
+                        categories: this.commitsDates
+                    },
+                    yAxis: {
+                        min: 0,
+                        labels: {
+                            formatter: function() {
+                                return this.axis.defaultLabelFormatter.call(this);
+                            }
+                        },
+                        title: {
+                            text: 'Number of tests',
                             style: {
-                                fontSize: "10px",
-                                fontWeight: 'bold',
-                                color: '#000000',
-                                textOutline: 0
-                            },
+                                color: "gray"
+                            }
                         }
-                    }
-                },
-                series: this.series
+                    },
+                    tooltip: {
+                        headerFormat: 'Commit from <b>{point.x}</b><br/>',
+                        pointFormat: '{series.name}: <b>{point.value} tests</b>'
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'normal',
+                            pointPadding: 0.1,
+                            groupPadding: 0,
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.value}',
+                                style: {
+                                    fontSize: "10px",
+                                    fontWeight: 'bold',
+                                    color: '#000000',
+                                    textOutline: 0
+                                },
+                            }
+                        }
+                    },
+                    series: this.series
+                }
             }
-        }
-    },
-};
+        },
+    };
 </script>
 
 <style scoped>

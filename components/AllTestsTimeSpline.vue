@@ -76,7 +76,11 @@
                         data: historyCommitsData,
                         color: "#f8cd46",
                         type: 'area',
-                        fillOpacity: 0.5
+                        fillOpacity: 0.5,
+                        tooltip: {
+                            headerFormat: 'Test name: <b>{point.x}</b><br/>',
+                            pointFormat: 'Average time: <b>{point.y} s</b><br/>'
+                        }
                     },
                     {
                         name: "current commit",
@@ -85,9 +89,12 @@
                         color: "#98c807",
                         marker: {
                             radius: 2,
-                            lineWidth: 2,
+                            lineWidth: 0.5,
                             symbol: "circle",
                             lineColor: "#98c807",
+                        },
+                        tooltip: {
+                            pointFormat: 'Current time: <b>{point.y} s</b><br/>'
                         }
                     }
                 ]
@@ -109,6 +116,9 @@
                     },
                     exporting: {
                         enabled: false
+                    },
+                    tooltip: {
+                        shared: true
                     },
                     xAxis: {
                         categories: this.testNamesForChart
@@ -138,11 +148,6 @@
                             }
                         }
                     ],
-                    tooltip:
-                        {
-                            headerFormat: 'Test name: <b>{point.x}</b><br/>',
-                            pointFormat: 'Test time in {series.name}: <b>{point.y} s</b>'
-                        },
                     series: this.series
                 }
             }

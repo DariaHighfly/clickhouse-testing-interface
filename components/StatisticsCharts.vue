@@ -17,6 +17,11 @@
             </TimePerformanceColumnChart>
         </div>
         <div class="row">
+            <UnstableTestsChart
+                :unstableQueries="unstableQueries">
+            </UnstableTestsChart>
+        </div>
+        <div class="row">
             <AllTestsTimeSpline
                 :timePerformance="timePerformance"
                 :allTestsHistory="allTestsHistory">
@@ -26,10 +31,11 @@
 </template>
 
 <script>
-import ColumnChart from "./ColumnChart";
+import ColumnChart from "./ColumnChart"
 import TimePerformanceColumnChart from "./TimePerformanceColumnChart"
-import PieChart from "./PieChart";
+import PieChart from "./PieChart"
 import AllTestsTimeSpline from "./AllTestsTimeSpline"
+import UnstableTestsChart from "./UnstableTestsChart"
 import {mapGetters} from "vuex";
 
 export default {
@@ -38,7 +44,8 @@ export default {
         ColumnChart,
         PieChart,
         TimePerformanceColumnChart,
-        AllTestsTimeSpline
+        AllTestsTimeSpline,
+        UnstableTestsChart
     },
     computed: {
         ...mapGetters({
@@ -86,5 +93,6 @@ export default {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: flex-start;
+        margin-bottom: 20px;
     }
 </style>

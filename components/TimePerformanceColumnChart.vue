@@ -47,10 +47,23 @@
                         avgTime.push({name: key, avgTime: currentAvgTime});
                     }
                 }
+                // for (let key in this.timePerformance) {
+                //     // Average of time difference - geometric mean
+                //     let composition = this.timePerformance[key].reduce(
+                //         (previousValue, currentValue) => {
+                //             return previousValue *= currentValue;
+                //         });
+                //     console.log(composition);
+                //     let currentAvgTime = Math.pow(composition, 1/this.timePerformance[key].length);
+                //     console.log(1/this.timePerformance[key].length, currentAvgTime);
+                //     if (Math.abs(currentAvgTime) > this.minimumThreshold) {
+                //         avgTime.push({name: key, avgTime: currentAvgTime});
+                //     }
+                // }
                 avgTime.sort((a, b) => {
                     return (a.avgTime - b.avgTime);
                 });
-                avgTime.map(elem => data.push(elem.avgTime));
+                avgTime.map(elem => data.push(parseFloat(elem.avgTime)).toFixed(4));
                 this.testNames = [];
                 avgTime.map(elem => this.testNames.push(elem.name));
                 return [
@@ -86,6 +99,12 @@
                                 return this.axis.defaultLabelFormatter.call(this);
                             }
                         },
+                        title: {
+                            text: 'Time, sec',
+                            style: {
+                                color: "gray"
+                            }
+                        }
                     },
                     tooltip: {
                         headerFormat: 'Test name: <b>{point.x}</b><br/>',
