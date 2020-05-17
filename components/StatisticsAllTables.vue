@@ -278,6 +278,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        margin-bottom: 40px;
     }
     .all-tables__title {
         font-size: 23px;

@@ -84,8 +84,8 @@
                     },
                     chart: {
                         type: 'column',
-                        height: '70%',
-                        width: 700
+                        height: '45%',
+                        width: 1135
                     },
                     tooltip: {
                         shared: true

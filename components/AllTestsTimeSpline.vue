@@ -112,8 +112,8 @@
                         }
                     },
                     chart: {
-                        height: '75%',
-                        width: 700
+                        height: '45%',
+                        width: 1135
                     },
                     exporting: {
                         enabled: false

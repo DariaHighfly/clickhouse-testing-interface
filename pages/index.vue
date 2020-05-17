@@ -1,12 +1,40 @@
 <template>
     <div id="app">
-        <Menu
-            :selected="selected">
-        </Menu>
-        <div>
-            <Navbar/>
-            <div class="box">
+        <div class="menu">
+            <img class="main-logo" src="../assets/logo.svg">
+            <div class="menu__list">
+                <div class="menu__list__item"
+                     v-on:click="changePage('dashboard')"
+                     v-bind:class="{'menu__list__item-selected': (currentPage === 'dashboard')}">
+                    <img class="menu__img" src="../assets/dashboard.png">
+                    <p class="menu__text">Dashboard</p>
+                </div>
+                <div class="menu__list__item"
+                     v-on:click="changePage('tables')"
+                     v-bind:class="{'menu__list__item-selected': (currentPage === 'tables')}">
+                    <img class="menu__img" src="../assets/tables.png">
+                    <p class="menu__text">Tables</p>
+                </div>
+            </div>
+        </div>
+        <div class="app__page">
+            <div class="navbar">
+                <Navbar/>
+            </div>
+            <div class="box" v-if="currentPage === 'dashboard'">
                 <StatisticsCharts/>
+            </div>
+            <div class="box" v-if="currentPage === 'tables'">
+                <StatisticsAllTables
+                    :commits="commits"
+                    :changes="changes"
+                    :unstableQueries="unstableQueries"
+                    :runErrors="runErrors"
+                    :skippedTests="skippedTests"
+                    :badTests="badTests"
+                    :testTimes="testTimes"
+                    :slowOnClientTests="slowOnClientTests">
+                </StatisticsAllTables>
             </div>
         </div>
     </div>
@@ -18,17 +46,19 @@
     import Menu from "../components/Menu"
     import Navbar from "../components/Navbar"
     import StatisticsCharts from "../components/StatisticsCharts"
+    import StatisticsAllTables from "~/components/StatisticsAllTables"
 
     export default {
         name: 'app',
         components: {
             Navbar,
             StatisticsCharts,
-            Menu
+            Menu,
+            StatisticsAllTables
         },
         data() {
             return {
-                selected: "dashboard"
+                currentPage: "dashboard"
             }
         },
         computed: {
@@ -41,7 +71,13 @@
                 badTests: "tests/getBadTests",
                 testTimes: "tests/getTestTimes",
                 slowOnClientTests: "tests/getSlowOnClientTests",
+                currentPage: "getCurrentPage"
             })
+        },
+        methods: {
+            changePage(page) {
+                this.currentPage = page;
+            }
         }
     }
 </script>
@@ -63,12 +99,56 @@
         width: 100%;
         background-color: #f4f6f8;
     }
+    .app__page {
+        width: 100%;
+    }
     .navbar {
         width: 100%;
-        color: black;
+        padding: 10px 0 15px 0;
+        background-color: #FFFFFF;
     }
     .box {
         padding: 0 20px 0 20px;
         overflow: scroll;
+    }
+
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        background-color: #FFFFFF;
+        transition: 0.5s;
+    }
+    .main-logo {
+        height: 50px;
+        width: auto;
+        margin: 20px 0 0 0;
+    }
+    .menu__list {
+        margin: 17px 0 0 0;
+    }
+    .menu__list__item {
+        margin: 0;
+        padding: 15px 10px 15px 10px;
+    }
+    .menu__list__item-selected {
+        background-color: #98c807;
+    }
+    .menu__img {
+        height: 35px;
+        width: auto;
+    }
+    .menu__list a {
+        text-decoration: none;
+        font-size: 16px;
+        color: #000000;
+        display: block;
+        transition: 0.3s;
+    }
+    .menu__text {
+        text-decoration: none;
+        font-size: 16px;
+        color: #000000;
+        margin: 0;
     }
 </style>

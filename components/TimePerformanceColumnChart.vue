@@ -85,8 +85,8 @@
                     },
                     chart: {
                         type: 'column',
-                        height: '65%',
-                        width: 700
+                        height: '45%',
+                        width: 1135
                     },
                     exporting: {
                         enabled: false
