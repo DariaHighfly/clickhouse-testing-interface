@@ -1,6 +1,6 @@
 <template>
     <div class="download__description">
-        <a :href="someLink">
+        <a :href="gitHubLink">
             <div class="download__description-box">
                 <p class="download__description-box__number">TEST OUTPUT</p>
                 <p class="download__description-box__text">DOWNLOAD</p>
@@ -13,10 +13,22 @@
 <script>
     export default {
         name: "Download",
+        props: {
+            commitName: {
+                type: String,
+                default: ""
+            }
+        },
         data() {
             return {
-                someLink: "https://clickhouse-test-reports.s3.yandex.net/0/b8be58559598ec31450d14c8cf526ee79dc571ac/performance_comparison/report.html#fail1",
+                gitHubLinkHead: "https://clickhouse-test-reports.s3.yandex.net/0/",
+                gitHubLinkTail: "/performance_comparison/output.7z",
                 linkToDownload: "output.7z"
+            }
+        },
+        computed: {
+            gitHubLink() {
+                return this.gitHubLinkHead + this.commitName + this.gitHubLinkTail;
             }
         }
     }

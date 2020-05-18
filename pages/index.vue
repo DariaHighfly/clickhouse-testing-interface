@@ -65,7 +65,9 @@
                 </Logs>
             </div>
             <div class="box" v-if="currentPage === 'download'">
-                <Download></Download>
+                <Download
+                    :commitName="commits.rightCommit.commit">
+                </Download>
             </div>
         </div>
     </div>
