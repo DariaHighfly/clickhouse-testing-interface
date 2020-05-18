@@ -4,12 +4,12 @@
             <div class="column">
                 <PieChart
                     :commitName="commits.rightCommit.commit"
-                    :allTests="allQueries"
+                    :allTests="allQueries.length"
                     :failTests="runErrors.length"
                     :skippedTests="skippedTests.length">
                 </PieChart>
                 <TestStatistics
-                    :allTests="allQueries"
+                    :allTests="allQueries.length"
                     :failTests="runErrors.length"
                     :skippedTests="skippedTests.length">
                 </TestStatistics>

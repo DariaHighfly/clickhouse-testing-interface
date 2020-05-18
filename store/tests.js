@@ -27,7 +27,8 @@ export const state = () => ({
         slowOnClient: main_json.slowOnClient,
         allQueries: main_json.allQueries,
         timePerformance: main_json.timePerformance,
-        reportErrors: main_json.reportErrors
+        reportErrors: main_json.reportErrors,
+        compareLog: main_json.compareLog
     },
     commitsHistory: [
         commit_json_1,
@@ -84,6 +85,9 @@ export const getters = {
     },
     getTimePerformance: (state) => {
         return state.currentCommitInfo.timePerformance;
+    },
+    getCompareLog: (state) => {
+        return state.currentCommitInfo.compareLog;
     },
     getDataErrors: (state) => {
         return state.currentCommitInfo.reportErrors;

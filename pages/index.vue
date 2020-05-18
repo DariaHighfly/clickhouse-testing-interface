@@ -15,6 +15,24 @@
                     <img class="menu__img" src="../assets/tables.png">
                     <p class="menu__text">Tables</p>
                 </div>
+                <div class="menu__list__item"
+                     v-on:click="changePage('queries')"
+                     v-bind:class="{'menu__list__item-selected': (currentPage === 'queries')}">
+                    <img class="menu__img" src="../assets/queries.png">
+                    <p class="menu__text">All Queries</p>
+                </div>
+                <div class="menu__list__item"
+                     v-on:click="changePage('logs')"
+                     v-bind:class="{'menu__list__item-selected': (currentPage === 'logs')}">
+                    <img class="menu__img" src="../assets/log.png">
+                    <p class="menu__text">Logs</p>
+                </div>
+                <div class="menu__list__item"
+                     v-on:click="changePage('download')"
+                     v-bind:class="{'menu__list__item-selected': (currentPage === 'download')}">
+                    <img class="menu__img" src="../assets/download.png">
+                    <p class="menu__text">Download</p>
+                </div>
             </div>
         </div>
         <div class="app__page">
@@ -36,6 +54,19 @@
                     :slowOnClientTests="slowOnClientTests">
                 </StatisticsAllTables>
             </div>
+            <div class="box" v-if="currentPage === 'queries'">
+                <AllQueries
+                    :allQueries="allQueries">
+                </AllQueries>
+            </div>
+            <div class="box" v-if="currentPage === 'logs'">
+                <Logs
+                    :compareLog="compareLog">
+                </Logs>
+            </div>
+            <div class="box" v-if="currentPage === 'download'">
+                <Download></Download>
+            </div>
         </div>
     </div>
 </template>
@@ -46,7 +77,10 @@
     import Menu from "../components/Menu"
     import Navbar from "../components/Navbar"
     import StatisticsCharts from "../components/StatisticsCharts"
-    import StatisticsAllTables from "~/components/StatisticsAllTables"
+    import StatisticsAllTables from "../components/StatisticsAllTables"
+    import AllQueries from "../components/AllQueries"
+    import Logs from "../components/Logs"
+    import Download from "../components/Download"
 
     export default {
         name: 'app',
@@ -54,7 +88,10 @@
             Navbar,
             StatisticsCharts,
             Menu,
-            StatisticsAllTables
+            StatisticsAllTables,
+            AllQueries,
+            Logs,
+            Download
         },
         data() {
             return {
@@ -71,11 +108,14 @@
                 badTests: "tests/getBadTests",
                 testTimes: "tests/getTestTimes",
                 slowOnClientTests: "tests/getSlowOnClientTests",
-                currentPage: "getCurrentPage"
+                timePerformance: "tests/getTimePerformance",
+                allQueries: "tests/getAllQueries",
+                compareLog: "tests/getCompareLog"
             })
         },
         methods: {
             changePage(page) {
+                console.log(this.allQueries);
                 this.currentPage = page;
             }
         }
@@ -130,6 +170,7 @@
     .menu__list__item {
         margin: 0;
         padding: 15px 10px 15px 10px;
+        cursor: pointer;
     }
     .menu__list__item-selected {
         background-color: #98c807;
