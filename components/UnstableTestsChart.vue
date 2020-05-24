@@ -6,7 +6,7 @@
                 Percentile:
             </p>
             <div class="params__radio">
-                <div class="params__radio_column" v-for="value in radioValues">
+                <div class="params__radio_column" v-for="value in Object.keys(criticalValues)">
                     <input type="radio" :id="value" :value="value" v-model="picked">
                     <label :for="value">{{value}} %</label>
                 </div>
@@ -30,7 +30,13 @@
             return {
                 testNames: [],
                 picked: 5,
-                radioValues: [5, 50, 95, 99]
+                criticalValues: {
+                    5: 0.65,
+                    50: 0.68,
+                    95: 1.96,
+                    99: 2.58
+                },
+                currentUnstableQueries: [...this.unstableQueries]
             }
         },
         computed: {
@@ -44,17 +50,33 @@
                 let testsTime = [];
                 let errorIntervals = [];
                 this.testNames = [];
-                this.unstableQueries.map(elem => {
-                    testsTime.push(elem.newTime);
+                this.currentUnstableQueries.sort((a,b) => {
+                    return (a.newTime - b.newTime);
+                });
+                this.currentUnstableQueries.map(elem => {
                     this.testNames.push(elem.testName);
-                    errorIntervals.push(
-                        [Number(parseFloat(elem.newTime - this.confidenceInterval).toFixed(4)),
-                            Number(parseFloat(elem.newTime + this.confidenceInterval).toFixed(4))]);
+                    let n = elem.allRunTimes.length;
+                    if (n === 0) {
+                        testsTime.push(elem.newTime);
+                        errorIntervals.push([]);
+                    } else {
+                        let variance = elem.allRunTimes.reduce((previousValue, currentValue) => {
+                            return previousValue += Math.pow(currentValue - elem.newTime, 2);
+                        }) / n;
+                        let confidenceInterval = this.criticalValues[this.picked] * (variance / Math.sqrt(n));
+                        let mean = Number(parseFloat((elem.allRunTimes.reduce((previousValue, currentValue) => {
+                            return previousValue += currentValue}) / n).toFixed(4)));
+                        testsTime.push(mean);
+                        errorIntervals.push([
+                            Number(parseFloat(mean - confidenceInterval).toFixed(4)),
+                            Number(parseFloat(mean + confidenceInterval).toFixed(4))]
+                        );
+                    }
                 });
                 return [
                     {
                         name: "Time of unstable test",
-                        type: 'spline',
+                        type: 'column',
                         data: testsTime,
                         color: "#98c807",
                         tooltip: {
@@ -73,6 +95,36 @@
                     }
                 ]
             },
+            // BOX PLOT
+            // // BOX PLOT params: the smallest observation (sample minimum), lower quartile (Q1),
+            // // median (Q2), upper quartile (Q3), and largest observation (sample maximum)
+            // series() {
+            //     let testsTime = [];
+            //     this.testNames = [];
+            //     this.currentUnstableQueries.map(elem => {
+            //         this.testNames.push(elem.testName);
+            //         let n = elem.allRunTimes.length;
+            //         if (n === 0) {
+            //             testsTime.push([elem.newTime, elem.newTime, elem.newTime, elem.newTime, elem.newTime]);
+            //         } else {
+            //             let variance = elem.allRunTimes.reduce((previousValue, currentValue) => {
+            //                 return previousValue += Math.pow(currentValue - elem.newTime, 2);
+            //             }) / n;
+            //             let confidenceInterval = this.criticalValues[this.picked] * (variance / Math.sqrt(n));
+            //             let mean = Number(parseFloat((elem.allRunTimes.reduce((previousValue, currentValue) => {
+            //                 return previousValue += currentValue}) / n).toFixed(4)));
+            //             let min = Number(parseFloat(Math.min(...elem.allRunTimes)).toFixed(4));
+            //             let max = Number(parseFloat(Math.max(...elem.allRunTimes)).toFixed(4));
+            //             testsTime.push([min, Number(parseFloat(mean - confidenceInterval).toFixed(4)),
+            //                 mean, Number(parseFloat(mean + confidenceInterval).toFixed(4)), max]);
+            //         }
+            //     });
+            //     return [{
+            //         name: 'Observations',
+            //         data: testsTime,
+            //         type: 'boxplot'
+            //     }];
+            // },
             unstableTestsChartOptions() {
                 return {
                     //  credits - to hide licence logo
@@ -83,7 +135,6 @@
                         text: "",
                     },
                     chart: {
-                        type: 'column',
                         height: '45%',
                         width: 1135
                     },

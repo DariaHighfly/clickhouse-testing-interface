@@ -135,6 +135,15 @@
                     hidden: false
                 },
                 tables: {
+                    currentRunErrors: {
+                        name: "Run errors",
+                        columns: [
+                            { testName: "Test" },
+                            { error: "Error" }
+                        ],
+                        values: [...this.runErrors],
+                        hidden: false
+                    },
                     currentChanges: {
                         name: "Changes in performance",
                         columns: [
@@ -158,16 +167,16 @@
                             { testName:  "Test" },
                             { query: "Query" }
                         ],
-                        values: [...this.unstableQueries],
-                        hidden: false
-                    },
-                    currentRunErrors: {
-                        name: "Run errors",
-                        columns: [
-                            { testName: "Test" },
-                            { error: "Error" }
-                        ],
-                        values: [...this.runErrors],
+                        values:  this.unstableQueries.map(elem => {
+                            let allowed = ["oldTime", "newTime", "relativeDifference", "quantiles", "testName", "query"];
+                            let filtered = Object.keys(elem)
+                                .filter(key => allowed.includes(key))
+                                .reduce((obj, key) => {
+                                    obj[key] = elem[key];
+                                    return obj;
+                                }, {});
+                            return filtered;
+                        }),
                         hidden: false
                     },
                     currentSkippedTests: {
@@ -341,9 +350,9 @@
         text-align: left;
         border-bottom: 2px solid #eaeaea;
     }
-     .all-tables__table__row:last-child {
+    .all-tables__table__row:last-child {
         border-right: none;
-     }
+    }
     .all-tables__table__column {
         color: #282828;
         font-size: 14px;
@@ -352,10 +361,10 @@
         padding: 10px;
     }
     .all-tables__table__column:last-child {
-       border-right: none;
+        border-right: none;
     }
     table tr:nth-child(even) {
-      background: #f7f7f7;
+        background: #f7f7f7;
     }
     .all-tables__table_visible {
         height: auto;

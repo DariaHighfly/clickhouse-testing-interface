@@ -117,7 +117,6 @@
         },
         methods: {
             changePage(page) {
-                console.log(this.allQueries);
                 this.currentPage = page;
             }
         }
