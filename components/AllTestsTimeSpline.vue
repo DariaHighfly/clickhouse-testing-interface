@@ -43,40 +43,50 @@
                                 }) / this.allTestsHistory[i].timePerformance[key].newTime.length;
                             if (!(key in allCommitsData.history)) {
                                 allCommitsData.history[key] = [commitAvgTime];
-                                // console.log(allCommitsData.history);
                             } else {
                                 allCommitsData.history[key].push(commitAvgTime);
                             }
-                            allCommitsData.current[key] = this.timePerformance[key].newTime;
                         }
                     }
+                    let testAvgTime = this.timePerformance[key].reduce(
+                        (allQueriesAvg, currentValue) => {
+                            let commitAvgTime = currentValue.newTime.reduce(
+                                (oneQueryAvg, nowValue) => {
+                                    return oneQueryAvg += nowValue;
+                                }) / currentValue.newTime.length;
+                            return allQueriesAvg += commitAvgTime;
+                        }, 0) / this.timePerformance[key].length;
+                    allCommitsData.current[key] = testAvgTime;
                 }
-                for (let key in allCommitsData.current) {
-                    // avg in one current commit different small tests in each test
-                    allCommitsData.current[key] = allCommitsData.current[key].reduce(
-                        (previousValue, currentValue) => {
-                            return previousValue += currentValue;
-                        }) / allCommitsData.current[key].length;
+                for (let key in allCommitsData.history) {
                     // avg in commits
                     allCommitsData.history[key] = allCommitsData.history[key].reduce(
                         (previousValue, currentValue) => {
                             return previousValue += currentValue;
                         }) / allCommitsData.history[key].length;
                 }
+                let currentData = [];
+                for (let key in allCommitsData.current) {
+                    currentData.push({name: key, currentTime: allCommitsData.current[key], historyTime: allCommitsData.history[key]});
+                }
+                currentData.sort((a,b) => {
+                    return Math.abs(a.currentTime - a.historyTime) - Math.abs(b.currentTime - b.historyTime);
+                });
                 let currentCommitData = [];
                 let historyCommitsData = [];
-                for (let key in allCommitsData.current) {
-                    currentCommitData.push(parseFloat(allCommitsData.current[key].toFixed(4)));
-                    historyCommitsData.push(parseFloat(allCommitsData.history[key].toFixed(4)));
-                    this.testNames.push(key);
-                }
+                currentData.map((elem, index) => {
+                    currentCommitData.push(parseFloat(elem.currentTime.toFixed(4)));
+                    historyCommitsData.push(parseFloat(elem.historyTime.toFixed(4)));
+                    this.testNames.push(elem.name);
+                });
                 return [
                     {
                         name: "average of all tests",
+                        type: 'column',
                         data: historyCommitsData,
                         color: "#f8cd46",
-                        type: 'area',
-                        fillOpacity: 0.5,
+                        pointPadding: 0.1,
+                        groupPadding: 0,
                         tooltip: {
                             headerFormat: 'Test name: <b>{point.x}</b><br/>',
                             pointFormat: 'Average time: <b>{point.y} s</b><br/>'
@@ -84,16 +94,17 @@
                     },
                     {
                         name: "current commit",
+                        type: 'scatter',
                         data: currentCommitData,
-                        type: 'spline',
                         color: "#98c807",
                         marker: {
-                            radius: 2,
+                            radius: 2.5,
                             lineWidth: 0.5,
                             symbol: "circle",
                             lineColor: "#98c807",
                         },
                         tooltip: {
+                            headerFormat: 'Test name: <b>{point.x}</b><br/>',
                             pointFormat: 'Current time: <b>{point.y} s</b><br/>'
                         }
                     }
@@ -106,7 +117,7 @@
                         enabled: false
                     },
                     title: {
-                        text: "TEST TIME OF ALL TESTS",
+                        text: "AVERAGE TEST TIME OF ALL TESTS",
                         style: {
                             fontSize: "16px",
                         }
@@ -124,31 +135,19 @@
                     xAxis: {
                         categories: this.testNamesForChart
                     },
-                    yAxis: [
-                        {
-                            labels: {
-                                formatter: function () {
-                                    return this.axis.defaultLabelFormatter.call(this);
-                                }
-                            },
-                            title: {
-                                text: 'Time, sec',
-                                style: {
-                                    color: "gray"
-                                }
+                    yAxis: {
+                        labels: {
+                            formatter: function() {
+                                return this.axis.defaultLabelFormatter.call(this);
                             }
                         },
-                        {
-                            labels: {
-                                formatter: function () {
-                                    return this.axis.defaultLabelFormatter.call(this);
-                                }
-                            },
-                            title: {
-                                text: '',
+                        title: {
+                            text: 'Time, s',
+                            style: {
+                                color: "gray"
                             }
                         }
-                    ],
+                    },
                     series: this.series
                 }
             }

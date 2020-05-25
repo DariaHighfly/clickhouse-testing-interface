@@ -110,7 +110,6 @@
                 badTests: "tests/getBadTests",
                 testTimes: "tests/getTestTimes",
                 slowOnClientTests: "tests/getSlowOnClientTests",
-                timePerformance: "tests/getTimePerformance",
                 allQueries: "tests/getAllQueries",
                 compareLog: "tests/getCompareLog"
             })

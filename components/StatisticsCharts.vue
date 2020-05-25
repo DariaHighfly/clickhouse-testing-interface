@@ -21,11 +21,11 @@
                 :allTestsHistory="allTestsHistory">
             </HistoryTestsColumnChart>
         </div>
-        <div class="row">
-            <TimePerformanceColumnChart
-                :timePerformance="timePerformance">
-            </TimePerformanceColumnChart>
-        </div>
+        <!--<div class="row">-->
+            <!--<TimePerformanceColumnChart-->
+                <!--:timePerformance="timePerformance">-->
+            <!--</TimePerformanceColumnChart>-->
+        <!--</div>-->
         <div class="row">
             <UnstableTestsChart
                 :unstableQueries="unstableQueries">

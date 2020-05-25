@@ -43,9 +43,6 @@
             testNamesForChart() {
                 return this.testNames;
             },
-            confidenceInterval() {
-                return (1/Math.sqrt(3)) * (this.picked / 100);
-            },
             series() {
                 let testsTime = [];
                 let errorIntervals = [];
@@ -55,16 +52,16 @@
                 });
                 this.currentUnstableQueries.map(elem => {
                     this.testNames.push(elem.testName);
-                    let n = elem.allRunTimes.length;
+                    let n = elem.rightRunTimes.length;
                     if (n === 0) {
                         testsTime.push(elem.newTime);
                         errorIntervals.push([]);
                     } else {
-                        let variance = elem.allRunTimes.reduce((previousValue, currentValue) => {
+                        let variance = elem.rightRunTimes.reduce((previousValue, currentValue) => {
                             return previousValue += Math.pow(currentValue - elem.newTime, 2);
                         }) / n;
                         let confidenceInterval = this.criticalValues[this.picked] * (variance / Math.sqrt(n));
-                        let mean = Number(parseFloat((elem.allRunTimes.reduce((previousValue, currentValue) => {
+                        let mean = Number(parseFloat((elem.rightRunTimes.reduce((previousValue, currentValue) => {
                             return previousValue += currentValue}) / n).toFixed(4)));
                         testsTime.push(mean);
                         errorIntervals.push([
@@ -103,18 +100,18 @@
             //     this.testNames = [];
             //     this.currentUnstableQueries.map(elem => {
             //         this.testNames.push(elem.testName);
-            //         let n = elem.allRunTimes.length;
+            //         let n = elem.rightRunTimes.length;
             //         if (n === 0) {
             //             testsTime.push([elem.newTime, elem.newTime, elem.newTime, elem.newTime, elem.newTime]);
             //         } else {
-            //             let variance = elem.allRunTimes.reduce((previousValue, currentValue) => {
+            //             let variance = elem.rightRunTimes.reduce((previousValue, currentValue) => {
             //                 return previousValue += Math.pow(currentValue - elem.newTime, 2);
             //             }) / n;
             //             let confidenceInterval = this.criticalValues[this.picked] * (variance / Math.sqrt(n));
-            //             let mean = Number(parseFloat((elem.allRunTimes.reduce((previousValue, currentValue) => {
+            //             let mean = Number(parseFloat((elem.rightRunTimes.reduce((previousValue, currentValue) => {
             //                 return previousValue += currentValue}) / n).toFixed(4)));
-            //             let min = Number(parseFloat(Math.min(...elem.allRunTimes)).toFixed(4));
-            //             let max = Number(parseFloat(Math.max(...elem.allRunTimes)).toFixed(4));
+            //             let min = Number(parseFloat(Math.min(...elem.rightRunTimes)).toFixed(4));
+            //             let max = Number(parseFloat(Math.max(...elem.rightRunTimes)).toFixed(4));
             //             testsTime.push([min, Number(parseFloat(mean - confidenceInterval).toFixed(4)),
             //                 mean, Number(parseFloat(mean + confidenceInterval).toFixed(4)), max]);
             //         }
