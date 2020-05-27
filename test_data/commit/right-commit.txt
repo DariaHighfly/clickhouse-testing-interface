@@ -1,0 +1,8 @@
+commit b8be58559598ec31450d14c8cf526ee79dc571ac
+Merge: 9de981d8 d480707c
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Tue Apr 14 01:32:38 2020 +0300
+
+    Merge pull request #10237 from ClickHouse/akz/mutations-to-correctly-handle-lambdas
+    
+    ALTER UPDATE/DELETE on Replicated* storages: Fixed "Unknown function lambda." error

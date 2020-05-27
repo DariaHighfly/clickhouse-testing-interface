@@ -1,0 +1,5 @@
+commit 3d4696d4ef7a4d1b70755b7c2dc1193900c81b80
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Mon Apr 20 23:34:48 2020 +0300
+
+    Update AvroRowInputFormat.cpp

@@ -1,0 +1,14 @@
+commit b29bddac12fe2defa35e551b54f1940dc89ab2b5 (pr/head)
+Merge: b7d4bccc77 c5ca4c3b3a
+Author: Alexander Tokmakov <avtokmakov@yandex-team.ru>
+Date:   Mon Apr 20 14:09:09 2020 +0300
+
+    Merge branch 'master' into database_atomic
+
+Real tested commit is:
+commit ffcef46ac56fe7b57cd43171a75de06ad37114e4 (pr/merge)
+Merge: b58fa8585c b29bddac12
+Author: tavplubix <tavplubix@gmail.com>
+Date:   Mon Apr 20 12:53:37 2020 +0000
+
+    Merge b29bddac12fe2defa35e551b54f1940dc89ab2b5 into b58fa8585cda86978d63a15514b755bd92897f89

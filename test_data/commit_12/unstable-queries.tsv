@@ -1,0 +1,25 @@
+0.0984	0.098	-0.005	[0.002,0.039,0.256,0.263]	mingroupby-orderbylimit1	\n         SELECT key, value\n         FROM mingroupby_orderbylimit1_111111_key_value\n         order by key, value limit 1 by key format Null;\n     
+0.0645	0.0538	-0.166	[0.005,0.16,0.239,0.277]	codecs_int_insert	INSERT INTO codec_seq_UInt64_DoubleDelta (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1106	0.125	0.13	[0.035,0.094,0.171,0.184]	codecs_int_insert	INSERT INTO codec_seq_UInt64_NONE (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.86	0.9651	0.122	[0.046,0.073,0.167,0.2]	if_array_string	SELECT count() FROM zeros(10000000) WHERE NOT ignore(rand() % 2 ? materialize([\'https://github.com/ClickHouse/ClickHouse/pull/1070\', \'https://www.google.ru/search?newwindow=1&site=&source=hp&q=zookeeper+wire+protocol+exists&oq=zookeeper+wire+protocol+exists&gs_l=psy-ab.3...330.6300.0.6687.33.28.0.0.0.0.386.4838.0j5j9j5.19.0....0...1.1.64.psy-ab..14.17.4448.0..0j35i39k1j0i131k1j0i22i30k1j0i19k1j33i21k1.r_3uFoNOrSU\']) : emptyArrayString())
+0.1174	0.1192	0.015	[0.007,0.021,0.13,0.191]	codecs_int_insert	INSERT INTO codec_seq_UInt64_Delta (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.9195	0.7946	-0.136	[0.098,0.116,0.128,0.132]	joins_in_memory	SELECT COUNT() FROM ints l LEFT JOIN ints r ON l.i64 = r.i64 WHERE i32 = 200042
+0.9532	0.8235	-0.137	[0.092,0.111,0.128,0.133]	joins_in_memory	SELECT COUNT() FROM ints l LEFT JOIN ints r USING i64 WHERE i32 IN(42, 100042, 200042, 300042, 400042)
+0.1278	0.1328	0.039	[0.001,0.062,0.125,0.14]	codecs_int_insert	INSERT INTO codec_mon_UInt64_Delta (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1133	0.1157	0.021	[0,0.038,0.121,0.162]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_LZ4 (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0986	0.1057	0.072	[0.012,0.067,0.114,0.133]	cpu_synthetic	SELECT quantilesExactIf(0.5, 0.9)(SendTiming, SendTiming > 0) FROM hits_100m_single
+0.0527	0.0536	0.017	[0,0.014,0.113,0.128]	base64_hits	SELECT count() FROM hits_100m_single WHERE base64Decode(base64Encode(MobilePhoneModel)) != MobilePhoneModel
+0.1462	0.1413	-0.034	[0.009,0.033,0.112,0.143]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_T64 (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1312	0.1401	0.067	[0.019,0.039,0.11,0.14]	codecs_int_insert	INSERT INTO codec_mon_UInt64_NONE (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.5036	0.4446	-0.118	[0.037,0.058,0.102,0.111]	math	SELECT count() FROM numbers(100000000) WHERE NOT ignore(exp10(toFloat64(number)))
+0.1203	0.1227	0.019	[0.017,0.032,0.101,0.121]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_Delta (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+1.0894	0.9673	-0.113	[0.06,0.076,0.099,0.106]	joins_in_memory	SELECT COUNT() FROM ints l LEFT JOIN ints r USING i64,i32,i16,i8 WHERE i32 = 200042
+0.1833	0.201	0.096	[0.017,0.064,0.098,0.108]	general_purpose_hashes_on_UUID	SELECT count() from zeros_mt(1000000000) where not ignore(farmHash64(materialize(toUUID(\'61f0c404-5cb3-11e7-907b-a6006ad3dba0\'))))
+0.1713	0.1763	0.029	[0.02,0.03,0.094,0.106]	codecs_int_insert	INSERT INTO codec_seq_UInt64_LZ4 (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1428	0.1364	-0.045	[0.006,0.044,0.093,0.121]	codecs_int_insert	INSERT INTO codec_seq_UInt64_T64 (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0338	0.0362	0.071	[0.024,0.063,0.091,0.106]	linear_regression	SELECT stochasticLinearRegression(Age, Income, ParamPrice, Robotness, RefererHash) FROM test.hits FORMAT Null
+0.0446	0.0437	-0.021	[0.016,0.035,0.089,0.102]	jit_large_requests	\n        SELECT\n            COUNT()\n        FROM\n            jit_test\n        WHERE\n            NOT ignore(a / b + c / d + e / f + g / h + i / j)\n        SETTINGS\n            compile_expressions = 0;\n    
+0.0325	0.0372	0.144	[0.024,0.043,0.086,0.121]	linear_regression	SELECT stochasticLinearRegressionState(0.0001, 0, 15)(Age, Income, ParamPrice, Robotness, RefererHash) FROM test.hits FORMAT Null
+0.085	0.0898	0.056	[0.03,0.049,0.08,0.103]	string_sort	SELECT PageCharset, MobilePhoneModel FROM hits_100m_single ORDER BY PageCharset, MobilePhoneModel LIMIT 10
+0.0297	0.03	0.01	[0.004,0.012,0.078,0.107]	codecs_float_insert	INSERT INTO codec_mon_Float64_NONE (n) SELECT number+sin(number) FROM system.numbers LIMIT 1000000 SETTINGS max_threads=1
+0.0329	0.0333	0.012	[0,0.018,0.043,0.417]	mingroupby-orderbylimit1	\n         SELECT key, min(value)\n         FROM mingroupby_orderbylimit1_111111_tuple\n         group by key format Null;\n    

@@ -1,0 +1,8 @@
+commit abbeb13cf064f0978e177650e03d1f9a31cadc57
+Merge: 03e1871b 7fbd7e95
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Sat Apr 18 18:39:22 2020 +0300
+
+    Merge pull request #10345 from Vxider/mv_parallel_insert_pt
+    
+    Add performance test for parallel insert of materialized view

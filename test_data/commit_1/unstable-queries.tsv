@@ -1,0 +1,42 @@
+0.0408	0.0453	0.11	[0.109,0.207,0.339,0.358]	mingroupby-orderbylimit1	\n         SELECT key, min(value)\n         FROM mingroupby_orderbylimit1_111111_tuple\n         group by key format Null;\n    
+0.063	0.0626	-0.007	[0.005,0.109,0.203,0.307]	codecs_int_insert	INSERT INTO codec_seq_UInt64_DoubleDelta (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1171	0.0996	-0.15	[0.045,0.102,0.198,0.207]	mingroupby-orderbylimit1	\n         SELECT key, value\n         FROM mingroupby_orderbylimit1_111111_key_value\n         order by key, value limit 1 by key format Null;\n     
+0.9955	0.9458	-0.05	[0.035,0.122,0.193,0.237]	if_array_string	SELECT count() FROM zeros(10000000) WHERE NOT ignore(rand() % 2 ? materialize([\'https://github.com/ClickHouse/ClickHouse/pull/1070\', \'https://www.google.ru/search?newwindow=1&site=&source=hp&q=zookeeper+wire+protocol+exists&oq=zookeeper+wire+protocol+exists&gs_l=psy-ab.3...330.6300.0.6687.33.28.0.0.0.0.386.4838.0j5j9j5.19.0....0...1.1.64.psy-ab..14.17.4448.0..0j35i39k1j0i131k1j0i22i30k1j0i19k1j33i21k1.r_3uFoNOrSU\']) : emptyArrayString())
+0.0459	0.0473	0.03	[0.002,0.031,0.168,0.192]	trim_whitespace	SELECT replaceRegexpOne(value, \'^ *\', \'\') FROM whitespaces LIMIT 10000000 FORMAT Null
+0.0863	0.0939	0.088	[0.027,0.072,0.152,0.176]	string_sort	SELECT PageCharset, MobilePhoneModel FROM hits_100m_single ORDER BY PageCharset, MobilePhoneModel LIMIT 10
+0.1427	0.1547	0.084	[0.011,0.076,0.14,0.167]	codecs_int_insert	INSERT INTO codec_mon_UInt64_Delta (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0328	0.0333	0.015	[0.001,0.015,0.134,0.142]	vectorize_aggregation_combinators	SELECT countMerge(v) FROM (SELECT countState() v FROM zeros(1000000000)) FORMAT Null
+0.1132	0.1187	0.048	[0.004,0.038,0.132,0.16]	codecs_int_insert	INSERT INTO codec_seq_UInt64_Delta (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1816	0.1614	-0.112	[0.002,0.08,0.131,0.145]	decimal_aggregates	SELECT uniq(d32), uniqCombined(d32), uniqExact(d32), uniqHLL12(d32) FROM t
+0.1825	0.1866	0.022	[0.021,0.056,0.12,0.136]	codecs_int_insert	INSERT INTO codec_seq_UInt64_LZ4 (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0511	0.0547	0.07	[0.045,0.091,0.119,0.14]	set_index	SELECT count() FROM test_in WHERE toInt64(a) IN (SELECT toInt64(rand(1)) FROM numbers(100000)) settings max_rows_to_read=1, read_overflow_mode=\'break\'
+0.0978	0.0886	-0.095	[0.011,0.028,0.119,0.13]	mingroupby-orderbylimit1	\n         SELECT key, value\n         FROM mingroupby_orderbylimit1_11111_key_value\n         order by key, value limit 1 by key format Null;\n     
+0.1181	0.1276	0.08	[0.003,0.026,0.118,0.147]	codecs_int_insert	INSERT INTO codec_seq_UInt64_NONE (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1484	0.1374	-0.075	[0.04,0.073,0.116,0.119]	codecs_int_insert	INSERT INTO codec_seq_UInt64_T64 (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.7471	0.8016	0.072	[0.047,0.101,0.113,0.166]	visit_param_extract_raw	SELECT count() FROM zeros(2000000) WHERE NOT ignore(visitParamExtractRaw(materialize(\'{"myparam":{"nested_1":"test_string","nested_2":"test_2","nested_1":"test_string","nested_2":"test_2","nested_1":"test_string","nested_2":"test_2"}}\'), \'myparam\'))
+0.2513	0.27	0.074	[0.004,0.027,0.11,0.128]	linear_regression	SELECT stochasticLinearRegressionState(0.0001, 0, 15, \'Momentum\')(Age, Income, ParamPrice, Robotness, RefererHash) FROM hits_100m_single FORMAT Null
+1.142	1.0909	-0.045	[0.008,0.014,0.107,0.13]	general_purpose_hashes_on_UUID	SELECT count() from zeros(100000000) where not ignore(murmurHash3_32(generateUUIDv4()))
+0.1248	0.1266	0.014	[0.002,0.02,0.103,0.113]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_Delta (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1037	0.1013	-0.024	[0.022,0.051,0.101,0.116]	cpu_synthetic	SELECT quantilesExactIf(0.5, 0.9)(SendTiming, SendTiming > 0) FROM hits_100m_single
+0.2924	0.2993	0.023	[0.023,0.068,0.101,0.13]	codecs_int_insert	INSERT INTO codec_seq_UInt64_ZSTD (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1175	0.1141	-0.029	[0.003,0.029,0.1,0.133]	string_sort	SELECT SearchPhrase, MobilePhoneModel FROM hits_100m_single ORDER BY SearchPhrase, MobilePhoneModel LIMIT 10
+0.7066	0.7584	0.073	[0.019,0.035,0.1,0.158]	empty_string_serialization	INSERT INTO empty_strings SELECT \'\' FROM zeros(100000000);
+0.0702	0.0696	-0.009	[0.002,0.012,0.097,0.109]	array_element	SELECT count() FROM numbers(10000000) WHERE NOT ignore([[1], [2]][number % 2 + 2])
+0.0786	0.0783	-0.004	[0.003,0.02,0.096,0.124]	website	SELECT URL, count() AS PageViews FROM hits_100m_single WHERE CounterID = 34 AND EventDate >= \'2013-07-01\' AND EventDate <= \'2013-07-31\' AND NOT DontCountHits AND NOT Refresh AND notEmpty(URL) GROUP BY URL ORDER BY PageViews DESC LIMIT 10
+0.0514	0.0476	-0.074	[0.016,0.073,0.094,0.103]	array_element	SELECT count() FROM numbers(10000000) WHERE NOT ignore([[], []][number % 2 + 2])
+0.1385	0.1371	-0.011	[0.01,0.032,0.087,0.106]	codecs_int_insert	INSERT INTO codec_mon_UInt64_NONE (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0685	0.0655	-0.044	[0.002,0.035,0.086,0.106]	sum_map	SELECT sumMapWithOverflow(key, val) FROM sum_map_100000 FORMAT Null
+0.1966	0.194	-0.014	[0.013,0.053,0.085,0.1]	codecs_int_insert	INSERT INTO codec_mon_UInt64_T64 (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1679	0.1647	-0.02	[0.009,0.023,0.084,0.101]	website	SELECT TraficSourceID, SearchEngineID, AdvEngineID, ((SearchEngineID = 0 AND AdvEngineID = 0) ? Referer : \'\') AS Src, URL AS Dst, count() AS PageViews FROM hits_100m_single WHERE CounterID = 34 AND EventDate >= \'2013-07-01\' AND EventDate <= \'2013-07-31\' AND NOT Refresh GROUP BY TraficSourceID, SearchEngineID, AdvEngineID, Src, Dst ORDER BY PageViews DESC LIMIT 1000
+1.9192	1.9957	0.039	[0.001,0.033,0.083,0.1]	cpu_synthetic	SELECT count() FROM hits_10m_single WHERE NOT ignore(MD5(SearchPhrase)) SETTINGS max_threads = 1
+0.0293	0.0316	0.078	[0.016,0.05,0.081,0.116]	set_index	SELECT count() FROM test_in WHERE a IN (SELECT rand(1) FROM numbers(100000)) SETTINGS max_rows_to_read = 1, read_overflow_mode = \'break\'
+1.0453	1.0551	0.009	[0.009,0.024,0.08,0.102]	general_purpose_hashes_on_UUID	SELECT count() from zeros(100000000) where not ignore(murmurHash3_64(generateUUIDv4()))
+0.2173	0.2068	-0.049	[0.015,0.038,0.08,0.142]	visit_param_extract_raw	SELECT count() FROM zeros(2000000) WHERE NOT ignore(visitParamExtractRaw(materialize(\'{"myparam":{"nested_1":"test_string","nested_2":"test_2"}}\'), \'myparam\'))
+0.1419	0.1531	0.078	[0.01,0.034,0.079,0.119]	string_sort	SELECT SearchPhrase, PageCharset FROM hits_100m_single ORDER BY SearchPhrase, PageCharset LIMIT 10
+0.1053	0.1132	0.075	[0.02,0.035,0.079,0.114]	trim_whitespace	SELECT replaceRegexpAll(value, \'^ *| *$\', \'\') FROM whitespaces LIMIT 10000000 FORMAT Null
+0.0695	0.0662	-0.048	[0.013,0.023,0.078,0.1]	array_element	SELECT count() FROM numbers(10000000) WHERE NOT ignore([[], [2]][number % 2 + 2])
+0.3619	0.3439	-0.05	[0.004,0.04,0.077,0.103]	general_purpose_hashes_on_UUID	SELECT count() from zeros_mt(1000000000) where not ignore(xxHash32(generateUUIDv4()))
+0.0438	0.0426	-0.028	[0.005,0.009,0.066,0.102]	general_purpose_hashes_on_UUID	SELECT count() from numbers(1000000) where not ignore(xxHash64(toDecimal128(number, 23)))
+0.1629	0.1547	-0.051	[0.004,0.023,0.063,0.142]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_T64 (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0994	0.1015	0.021	[0.001,0.015,0.055,0.129]	visit_param_extract_raw	SELECT count() FROM zeros(2000000) WHERE NOT ignore(visitParamExtractRaw(materialize(\'{"myparam":"test_string"}\'), \'myparam\'))
+0.2413	0.2432	0.007	[0.007,0.012,0.045,0.107]	codecs_int_insert	INSERT INTO codec_mon_UInt64_DoubleDelta (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1

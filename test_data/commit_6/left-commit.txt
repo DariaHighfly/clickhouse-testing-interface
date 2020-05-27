@@ -1,0 +1,8 @@
+commit 2645dede2cef0b357c52fe047c463ea1818db87d
+Merge: 1a067484 a99a340b
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Tue Apr 21 02:26:47 2020 +0300
+
+    Merge pull request #10386 from palasonic1/palasonic-fix-read-hash-table
+    
+    Fix reading HashTable from buffer

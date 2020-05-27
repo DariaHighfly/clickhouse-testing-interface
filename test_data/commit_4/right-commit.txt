@@ -1,0 +1,13 @@
+commit 750b73084a5adf54a30a7f0ed07cba879c0ecc2d (pr/head)
+Author: Alexey Milovidov <milovidov@yandex-team.ru>
+Date:   Tue Apr 21 02:56:57 2020 +0300
+
+    Added a test from Alexey Ilyukhov @livace
+
+Real tested commit is:
+commit 08397efa64a6b11b514b1f82a14fac989f02b921 (pr/merge)
+Merge: 4ecc86be 750b7308
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Tue Apr 21 02:57:07 2020 +0300
+
+    Merge 750b73084a5adf54a30a7f0ed07cba879c0ecc2d into 4ecc86becab4570e9bff67075f650e688da2e7d5

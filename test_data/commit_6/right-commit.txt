@@ -1,0 +1,8 @@
+commit d94fc26315a9d200c0ce407b40c2c5e34a88dddd
+Merge: 2645dede a0d56997
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Tue Apr 21 02:27:52 2020 +0300
+
+    Merge pull request #10384 from ClickHouse/clang-10-ci
+    
+    Use clang-10 in CI

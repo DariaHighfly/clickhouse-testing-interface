@@ -1,0 +1,2 @@
+./distributed_aggregation-err.log	clickhouse_driver.errors.ServerException: Code: 279.
+./distributed_aggregation-err.log	DB::Exception: All connection tries failed. Log: 

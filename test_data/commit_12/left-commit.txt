@@ -1,0 +1,5 @@
+commit 73f978cb0f8e897aa6dbff9f4634e846d5f64f9e
+Author: Ivan Blinkov <github@blinkov.ru>
+Date:   Mon Apr 20 20:37:57 2020 +0300
+
+    Update build.py

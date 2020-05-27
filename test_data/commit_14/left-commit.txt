@@ -1,0 +1,5 @@
+commit 52dfd107853b62cad28d7928f570f4f9cbf11893
+Author: Ivan Blinkov <github@blinkov.ru>
+Date:   Mon Apr 20 15:23:33 2020 +0300
+
+    Delete convert_toc.py

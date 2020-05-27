@@ -1,0 +1,5 @@
+commit b58fa8585cda86978d63a15514b755bd92897f89 (HEAD -> master)
+Author: Ivan Blinkov <github@blinkov.ru>
+Date:   Mon Apr 20 15:52:12 2020 +0300
+
+    Update website.py

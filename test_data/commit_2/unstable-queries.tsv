@@ -1,0 +1,27 @@
+0.05	0.0331	-0.338	[0.018,0.246,0.38,0.389]	mingroupby-orderbylimit1	\n         SELECT key, min(value)\n         FROM mingroupby_orderbylimit1_111111_tuple\n         group by key format Null;\n    
+0.0605	0.0621	0.026	[0.026,0.044,0.174,0.304]	codecs_int_insert	INSERT INTO codec_seq_UInt64_DoubleDelta (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1135	0.113	-0.005	[0.004,0.02,0.16,0.207]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_Delta (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.945	0.8201	-0.133	[0.001,0.045,0.158,0.18]	if_array_string	SELECT count() FROM zeros(10000000) WHERE NOT ignore(rand() % 2 ? materialize([\'https://github.com/ClickHouse/ClickHouse/pull/1070\', \'https://www.google.ru/search?newwindow=1&site=&source=hp&q=zookeeper+wire+protocol+exists&oq=zookeeper+wire+protocol+exists&gs_l=psy-ab.3...330.6300.0.6687.33.28.0.0.0.0.386.4838.0j5j9j5.19.0....0...1.1.64.psy-ab..14.17.4448.0..0j35i39k1j0i131k1j0i22i30k1j0i19k1j33i21k1.r_3uFoNOrSU\']) : emptyArrayString())
+0.1124	0.114	0.014	[0.014,0.117,0.152,0.157]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_LZ4 (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1209	0.1217	0.006	[0.001,0.007,0.141,0.175]	mingroupby-orderbylimit1	\n         SELECT key, value\n         FROM mingroupby_orderbylimit1_111111_key_value\n         order by key, value limit 1 by key format Null;\n     
+0.7311	0.7345	0.004	[0.004,0.083,0.138,0.154]	empty_string_serialization	INSERT INTO empty_strings SELECT \'\' FROM zeros(100000000);
+0.1178	0.1188	0.008	[0.008,0.055,0.137,0.147]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_NONE (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1303	0.127	-0.026	[0,0.048,0.126,0.134]	codecs_int_insert	INSERT INTO codec_mon_UInt64_Delta (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0276	0.0274	-0.008	[0.005,0.091,0.116,0.123]	codecs_float_insert	INSERT INTO codec_seq_Float64_ZSTD (n) SELECT number/pi() FROM system.numbers LIMIT 1000000 SETTINGS max_threads=1
+0.1365	0.1459	0.068	[0.006,0.067,0.114,0.139]	codecs_int_insert	INSERT INTO codec_mon_UInt64_NONE (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1023	0.107	0.045	[0.013,0.054,0.111,0.117]	cpu_synthetic	SELECT quantilesExactIf(0.5, 0.9)(SendTiming, SendTiming > 0) FROM hits_100m_single
+0.0829	0.0751	-0.095	[0.017,0.062,0.109,0.183]	website	SELECT URL, count() AS PageViews FROM hits_100m_single WHERE CounterID = 34 AND EventDate >= \'2013-07-01\' AND EventDate <= \'2013-07-31\' AND NOT DontCountHits AND NOT Refresh AND notEmpty(URL) GROUP BY URL ORDER BY PageViews DESC LIMIT 10
+0.25	0.2578	0.031	[0.011,0.031,0.109,0.128]	linear_regression	SELECT stochasticLinearRegressionState(0.0001, 0, 15, \'Momentum\')(Age, Income, ParamPrice, Robotness, RefererHash) FROM hits_100m_single FORMAT Null
+0.1682	0.1846	0.097	[0.003,0.044,0.104,0.117]	codecs_int_insert	INSERT INTO codec_seq_UInt64_LZ4 (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1171	0.1191	0.017	[0.008,0.051,0.1,0.125]	codecs_int_insert	INSERT INTO codec_seq_UInt64_NONE (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.065	0.0669	0.029	[0.002,0.022,0.096,0.104]	pre_limit_no_sorting	SELECT sum(number) FROM (select number from system.numbers_mt limit 1000000000)
+0.6537	0.6587	0.007	[0.007,0.041,0.095,0.128]	random_printable_ascii	SELECT count() FROM zeros(1000000) WHERE NOT ignore(randomPrintableASCII(rand() % 1000))
+0.0683	0.0637	-0.068	[0.019,0.063,0.093,0.102]	array_element	SELECT count() FROM numbers(10000000) WHERE NOT ignore([[], [2]][number % 2 + 2])
+0.0443	0.0438	-0.012	[0.011,0.05,0.091,0.118]	jit_large_requests	\n        SELECT\n            COUNT()\n        FROM\n            jit_test\n        WHERE\n            NOT ignore(a / b + c / d + e / f + g / h + i / j)\n        SETTINGS\n            compile_expressions = 0;\n    
+0.1287	0.1298	0.008	[0.008,0.031,0.091,0.122]	order_by_read_in_order	SELECT * FROM hits_100m_single ORDER BY CounterID, EventDate LIMIT 100
+0.0487	0.0506	0.039	[0.012,0.041,0.085,0.105]	array_element	SELECT count() FROM numbers(10000000) WHERE NOT ignore([[], []][number % 2 + 2])
+0.1503	0.1439	-0.043	[0.004,0.038,0.083,0.101]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_T64 (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1065	0.1051	-0.014	[0.002,0.02,0.075,0.112]	trim_whitespace	SELECT replaceRegexpAll(value, \'^ *| *$\', \'\') FROM whitespaces LIMIT 10000000 FORMAT Null
+0.1051	0.1127	0.072	[0.005,0.032,0.075,0.105]	string_sort	SELECT SearchPhrase, MobilePhoneModel FROM hits_100m_single ORDER BY SearchPhrase, MobilePhoneModel LIMIT 10
+0.1551	0.1595	0.028	[0.006,0.031,0.075,0.13]	website	SELECT TraficSourceID, SearchEngineID, AdvEngineID, ((SearchEngineID = 0 AND AdvEngineID = 0) ? Referer : \'\') AS Src, URL AS Dst, count() AS PageViews FROM hits_100m_single WHERE CounterID = 34 AND EventDate >= \'2013-07-01\' AND EventDate <= \'2013-07-31\' AND NOT Refresh GROUP BY TraficSourceID, SearchEngineID, AdvEngineID, Src, Dst ORDER BY PageViews DESC LIMIT 1000
+0.0293	0.0286	-0.024	[0.014,0.026,0.05,0.16]	generate_table_function	SELECT sum(NOT ignore(*)) FROM (SELECT * FROM generateRandom(\'i Array(Nullable(UUID))\', 0, 10, 10) LIMIT 10000000);

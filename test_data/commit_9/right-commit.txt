@@ -1,0 +1,13 @@
+commit a0d56997de1e736f6b2b09797be5e7b4e73adbe7 (pr/head)
+Author: Alexey Milovidov <milovidov@yandex-team.ru>
+Date:   Mon Apr 20 23:13:33 2020 +0300
+
+    Fix error
+
+Real tested commit is:
+commit ba7047e9ca98fb8b8fdb685d7f907ebc9b386738 (pr/merge)
+Merge: 8c2839d3 a0d56997
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Mon Apr 20 21:14:23 2020 +0000
+
+    Merge a0d56997de1e736f6b2b09797be5e7b4e73adbe7 into 8c2839d3c9fcb671492356b12af3366ff0601c91

@@ -1,0 +1,5 @@
+commit 848e4a0541630aef09cd7fb4926c89b7bdd0c060
+Author: Alexey Milovidov <milovidov@yandex-team.ru>
+Date:   Mon Apr 20 11:15:43 2020 +0300
+
+    Added a test for #2219

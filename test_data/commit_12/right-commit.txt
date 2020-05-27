@@ -1,0 +1,8 @@
+commit faeab5f6496e4875ae9b66a97a60229bbca8acdf
+Merge: 73f978cb 2d08c8e4
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Mon Apr 20 22:47:12 2020 +0300
+
+    Merge pull request #10370 from amosbird/clang-10
+    
+    clang-10 fix

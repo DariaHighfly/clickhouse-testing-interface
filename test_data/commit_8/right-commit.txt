@@ -1,0 +1,13 @@
+commit a99a340b0bbff6a151ccac2abbd8b38f00f813bf (pr/head)
+Author: Maxim Serebryakov <palasonic1@yandex.ru>
+Date:   Mon Apr 20 23:19:03 2020 +0300
+
+    fix reading HashTable and HashSet
+
+Real tested commit is:
+commit ebbeaef71d57f0abf17ba35ebd41a452efc31d0c (pr/merge)
+Merge: 8c2839d3 a99a340b
+Author: palasonic1 <39745378+palasonic1@users.noreply.github.com>
+Date:   Mon Apr 20 21:14:23 2020 +0000
+
+    Merge a99a340b0bbff6a151ccac2abbd8b38f00f813bf into 8c2839d3c9fcb671492356b12af3366ff0601c91

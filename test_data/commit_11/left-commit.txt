@@ -1,0 +1,8 @@
+commit 61d33a8d9ac6b8db90e1a0ce8924d70d20cd58b4 (tag: v20.4.1.3079-testing)
+Merge: abbeb13c 5d11118c
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Sun Apr 19 20:28:23 2020 +0300
+
+    Merge pull request #10263 from azat/distributed-send-bg-pool
+    
+    Use background thread pool for distributed sends

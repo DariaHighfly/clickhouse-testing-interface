@@ -1,0 +1,8 @@
+commit 69b6f135e7dc441739e5940e40cfc1784259a647
+Merge: faeab5f6 f6de9c6f
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Mon Apr 20 22:54:53 2020 +0300
+
+    Merge pull request #10382 from excitoon-favorites/altercodec
+    
+    Allowed to alter column in non-modifying data mode when the same type is specified

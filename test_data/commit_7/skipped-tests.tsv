@@ -1,0 +1,20 @@
+IPv4	Marked as broken (see compare.sh)
+IPv6	Marked as broken (see compare.sh)
+modulo	Marked as broken (see compare.sh)
+parse_engine_file	Marked as broken (see compare.sh)
+number_formatting_formats	Marked as broken (see compare.sh)
+select_format	Marked as broken (see compare.sh)
+arithmetic	Marked as broken (see compare.sh)
+cryptographic_hashes	Marked as broken (see compare.sh)
+logical_functions_medium	Marked as broken (see compare.sh)
+logical_functions_small	Marked as broken (see compare.sh)
+agg_functions_min_max_any	clickhouse_driver.errors.ServerException: Code: 60.
+columns_hashing	clickhouse_driver.errors.ServerException: Code: 60.
+date_time	Test is tagged as long.
+float_formatting	Test is tagged as long.
+float_parsing	Test is tagged as long.
+if_to_multiif	clickhouse_driver.errors.ServerException: Code: 60.
+insert_values_with_expressions	clickhouse_driver.errors.ServerException: Code: 107.
+leftpad	clickhouse_driver.errors.ServerException: Code: 60.
+nyc_taxi	clickhouse_driver.errors.ServerException: Code: 60.
+set	Test is tagged as long.

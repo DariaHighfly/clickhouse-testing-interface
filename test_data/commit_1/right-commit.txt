@@ -1,0 +1,8 @@
+commit 0ca37c75fd433b8ebc6bfecf445c19dfd34b59d2 (HEAD -> master)
+Merge: bc220053 750b7308
+Author: Ilya Yatsishin <2159081+qoega@users.noreply.github.com>
+Date:   Tue Apr 21 15:41:00 2020 +0300
+
+    Merge pull request #10390 from ClickHouse/fix-flattening-of-array-tuples
+    
+    Fix flattening of Array(Tuple(...)) data type.

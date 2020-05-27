@@ -1,0 +1,28 @@
+0.0388	0.0379	-0.024	[0.022,0.246,0.37,0.38]	simple_join_query	SELECT COUNT() FROM join_table AS left LEFT JOIN (SELECT A FROM join_table) AS right ON left.A = right.A
+0.0449	0.0478	0.064	[0.064,0.091,0.349,0.404]	mingroupby-orderbylimit1	\n         SELECT key, min(value)\n         FROM mingroupby_orderbylimit1_111111_tuple\n         group by key format Null;\n    
+0.0464	0.0439	-0.054	[0,0.014,0.229,0.248]	simple_join_query	SELECT COUNT() FROM join_table AS left LEFT JOIN join_table AS right ON left.A = right.A
+0.0565	0.0542	-0.041	[0.04,0.101,0.227,0.291]	codecs_int_insert	INSERT INTO codec_seq_UInt64_DoubleDelta (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0855	0.085	-0.006	[0.005,0.023,0.177,0.213]	string_sort	SELECT PageCharset, MobilePhoneModel FROM hits_100m_single ORDER BY PageCharset, MobilePhoneModel LIMIT 10
+0.1423	0.1561	0.096	[0.017,0.083,0.174,0.179]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_T64 (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0596	0.0593	-0.006	[0.005,0.102,0.166,0.186]	base64_hits	SELECT count() FROM hits_100m_single WHERE base64Decode(base64Encode(MobilePhoneModel)) != MobilePhoneModel
+0.7069	0.7732	0.093	[0.08,0.093,0.161,0.171]	empty_string_serialization	INSERT INTO empty_strings SELECT \'\' FROM zeros(100000000);
+0.1644	0.1803	0.096	[0.044,0.066,0.149,0.158]	codecs_int_insert	INSERT INTO codec_seq_UInt64_LZ4 (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1946	0.1935	-0.006	[0.004,0.013,0.146,0.156]	general_purpose_hashes_on_UUID	SELECT count() from zeros_mt(1000000000) where not ignore(cityHash64(materialize(toUUID(\'61f0c404-5cb3-11e7-907b-a6006ad3dba0\'))))
+0.0463	0.0438	-0.054	[0.031,0.048,0.141,0.152]	simple_join_query	SELECT COUNT() FROM join_table LEFT JOIN (SELECT A FROM join_table) AS right USING A
+0.0318	0.0323	0.015	[0.008,0.009,0.141,0.147]	vectorize_aggregation_combinators	SELECT countMerge(v) FROM (SELECT countState() v FROM zeros(1000000000)) FORMAT Null
+0.0884	0.0936	0.058	[0.02,0.059,0.132,0.149]	string_sort	SELECT MobilePhoneModel, PageCharset FROM hits_100m_single ORDER BY MobilePhoneModel, PageCharset LIMIT 10
+0.1157	0.1119	-0.033	[0.033,0.075,0.129,0.14]	codecs_int_insert	INSERT INTO codec_seq_UInt64_Delta (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1362	0.1244	-0.087	[0.011,0.086,0.128,0.133]	codecs_int_insert	INSERT INTO codec_mon_UInt64_Delta (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0279	0.0272	-0.026	[0.023,0.067,0.127,0.135]	codecs_float_insert	INSERT INTO codec_seq_Float64_Gorilla (n) SELECT number/pi() FROM system.numbers LIMIT 1000000 SETTINGS max_threads=1
+0.0361	0.034	-0.059	[0.004,0.041,0.119,0.128]	set_index	SELECT count() FROM test_in WHERE a IN (SELECT rand(1) FROM numbers(100000)) SETTINGS max_rows_to_read = 1, read_overflow_mode = \'break\'
+0.1153	0.1158	0.004	[0.004,0.025,0.119,0.163]	codecs_int_insert	INSERT INTO codec_seq_UInt64_NONE (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.066	0.0666	0.009	[0.008,0.04,0.117,0.136]	array_element	SELECT count() FROM numbers(10000000) WHERE NOT ignore([[1], [2]][number % 2 + 2])
+0.0417	0.0384	-0.08	[0.063,0.08,0.116,0.131]	int_parsing	SELECT count() FROM test.hits WHERE NOT ignore(toString(UserAgent)) SETTINGS max_threads = 1
+0.1302	0.1264	-0.03	[0.028,0.057,0.115,0.121]	codecs_int_insert	INSERT INTO codec_mon_UInt64_NONE (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1547	0.1571	0.015	[0.005,0.015,0.114,0.125]	array_auc	SELECT avg(ifNotFinite(arrayAUC(arrayMap(x -> rand(x) / 0x100000000, range(2 + rand() % 100)), arrayMap(x -> rand(x) % 2, range(2 + rand() % 100))), 0)) FROM numbers(100000)
+0.0824	0.0806	-0.022	[0.008,0.02,0.111,0.138]	website	SELECT URL, count() AS PageViews FROM hits_100m_single WHERE CounterID = 34 AND EventDate >= \'2013-07-01\' AND EventDate <= \'2013-07-31\' AND NOT DontCountHits AND NOT Refresh AND notEmpty(URL) GROUP BY URL ORDER BY PageViews DESC LIMIT 10
+0.0415	0.0435	0.048	[0.039,0.06,0.109,0.12]	website	SELECT uniq(SearchPhrase) FROM hits_10m_single FORMAT Null
+0.1058	0.0999	-0.056	[0.055,0.064,0.107,0.107]	cpu_synthetic	SELECT quantilesExactIf(0.5, 0.9)(SendTiming, SendTiming > 0) FROM hits_100m_single
+0.2412	0.2508	0.039	[0.016,0.039,0.104,0.124]	linear_regression	SELECT stochasticLinearRegressionState(0.0001, 0, 15, \'Momentum\')(Age, Income, ParamPrice, Robotness, RefererHash) FROM hits_100m_single FORMAT Null
+0.9258	0.9358	0.01	[0.01,0.059,0.101,0.11]	cpu_synthetic	SELECT count() FROM hits_100m_single WHERE NOT ignore(MD5(SearchPhrase))
+0.0643	0.0645	0.003	[0.002,0.059,0.1,0.12]	trim_whitespace	SELECT replaceRegexpOne(value, \' *$\', \'\') FROM whitespaces LIMIT 10000000 FORMAT Null

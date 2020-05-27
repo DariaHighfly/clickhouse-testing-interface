@@ -1,0 +1,56 @@
+0.1935	0.2602	0.344	[0,0.018,0.373,0.382]	logical_functions_small	SELECT count() FROM test_logical_functions._2_1_UInt8 WHERE NOT ignore(xor(x1,x2))
+0.0329	0.0332	0.009	[0.008,0.013,0.369,0.471]	mingroupby-orderbylimit1	\n         SELECT key, min(value)\n         FROM mingroupby_orderbylimit1_111111_tuple\n         group by key format Null;\n    
+0.1419	0.133	-0.063	[0.01,0.065,0.358,0.451]	cryptographic_hashes	SELECT ignore(SHA1(toString(1000000000+number))) FROM numbers_mt(10000000) FORMAT Null
+0.3209	0.226	-0.296	[0.001,0.154,0.358,0.404]	number_formatting_formats	INSERT INTO table_Null SELECT number FROM numbers(100000000)
+0.1461	0.1254	-0.142	[0.017,0.055,0.315,0.375]	cryptographic_hashes	SELECT ignore(halfMD5(materialize(\'\'))) FROM numbers_mt(10000000) FORMAT Null
+0.133	0.1461	0.098	[0.036,0.098,0.31,0.393]	cryptographic_hashes	SELECT ignore(MD5(materialize(\'\'))) FROM numbers_mt(10000000) FORMAT Null
+0.2693	0.1938	-0.281	[0.187,0.231,0.271,0.281]	logical_functions_small	SELECT count() FROM test_logical_functions._2_0_UInt8 WHERE NOT ignore(and(x1,x2))
+0.0696	0.0696	0	[0,0.005,0.245,0.508]	set_hits	SELECT count() FROM hits_100m_single WHERE UserID IN (SELECT UserID FROM hits_100m_single WHERE AdvEngineID != 0)
+0.2	0.1686	-0.158	[0.087,0.126,0.241,0.288]	cryptographic_hashes	SELECT ignore(SHA224(toString(1000000000+number))) FROM numbers_mt(10000000) FORMAT Null
+0.2596	0.2719	0.047	[0.001,0.041,0.218,0.24]	logical_functions_medium	SELECT count() FROM test_logical_functions._4_1_Nullable_Mixed WHERE NOT ignore(xor(x1,x2,x3,x4))
+0.1751	0.1983	0.132	[0.002,0.059,0.202,0.22]	cryptographic_hashes	SELECT ignore(SHA256(toString(1000000000+number))) FROM numbers_mt(10000000) FORMAT Null
+0.1772	0.1904	0.074	[0.074,0.115,0.195,0.233]	cryptographic_hashes	SELECT ignore(SHA224(materialize(\'\'))) FROM numbers_mt(10000000) FORMAT Null
+0.1919	0.1551	-0.192	[0.049,0.107,0.193,0.21]	cryptographic_hashes	SELECT ignore(SHA256(materialize(\'\'))) FROM numbers_mt(10000000) FORMAT Null
+0.0584	0.0614	0.051	[0.042,0.053,0.191,0.251]	codecs_int_insert	INSERT INTO codec_seq_UInt64_DoubleDelta (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1355	0.1479	0.091	[0,0.091,0.18,0.255]	cryptographic_hashes	SELECT ignore(MD5(toString(1000000000+number))) FROM numbers_mt(10000000) FORMAT Null
+0.8995	0.9187	0.021	[0.021,0.065,0.171,0.231]	if_array_string	SELECT count() FROM zeros(10000000) WHERE NOT ignore(rand() % 2 ? materialize([\'https://github.com/ClickHouse/ClickHouse/pull/1070\', \'https://www.google.ru/search?newwindow=1&site=&source=hp&q=zookeeper+wire+protocol+exists&oq=zookeeper+wire+protocol+exists&gs_l=psy-ab.3...330.6300.0.6687.33.28.0.0.0.0.386.4838.0j5j9j5.19.0....0...1.1.64.psy-ab..14.17.4448.0..0j35i39k1j0i131k1j0i22i30k1j0i19k1j33i21k1.r_3uFoNOrSU\']) : emptyArrayString())
+0.1335	0.1382	0.035	[0.007,0.07,0.171,0.269]	cryptographic_hashes	SELECT ignore(SHA1(materialize(\'\'))) FROM numbers_mt(10000000) FORMAT Null
+0.1093	0.1217	0.113	[0.009,0.074,0.17,0.178]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_NONE (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.8132	0.7704	-0.053	[0.047,0.067,0.162,0.193]	number_formatting_formats	INSERT INTO table_Native SELECT number FROM numbers(100000000)
+0.2407	0.2349	-0.025	[0.003,0.012,0.153,0.188]	logical_functions_medium	SELECT count() FROM test_logical_functions._4_1_UInt8 WHERE NOT ignore(xor(x1,x2,x3,x4))
+0.1152	0.1243	0.078	[0.05,0.086,0.152,0.171]	codecs_int_insert	INSERT INTO codec_seq_UInt64_Delta (n) SELECT number FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.184	0.1629	-0.115	[0.036,0.107,0.149,0.16]	codecs_int_insert	INSERT INTO codec_mon_UInt64_T64 (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.2756	0.267	-0.032	[0.004,0.028,0.149,0.156]	logical_functions_small	SELECT count() FROM test_logical_functions._2_1_UInt8 WHERE NOT ignore(and(x1,x2))
+0.1435	0.1386	-0.035	[0.027,0.036,0.138,0.355]	cryptographic_hashes	SELECT ignore(halfMD5(toString(1000000000+number))) FROM numbers_mt(10000000) FORMAT Null
+0.1171	0.1051	-0.103	[0.009,0.094,0.134,0.145]	mingroupby-orderbylimit1	\n         SELECT key, value\n         FROM mingroupby_orderbylimit1_111111_key_value\n         order by key, value limit 1 by key format Null;\n     
+0.0265	0.0256	-0.034	[0.006,0.045,0.125,0.144]	codecs_float_insert	INSERT INTO codec_seq_Float64_Gorilla (n) SELECT number/pi() FROM system.numbers LIMIT 1000000 SETTINGS max_threads=1
+0.0476	0.0476	0	[0.001,0.044,0.125,0.16]	trim_whitespace	SELECT replaceRegexpOne(value, \'^ *\', \'\') FROM whitespaces LIMIT 10000000 FORMAT Null
+0.1186	0.1254	0.057	[0.007,0.06,0.123,0.143]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_LZ4 (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.3289	0.2856	-0.132	[0.06,0.093,0.122,0.125]	logical_functions_medium	SELECT count() FROM (SELECT materialize(toNullable(1)) AS x1, materialize(toNullable(1)) AS x2, materialize(toNullable(1)) AS x3 FROM zeros(20000000)) WHERE NOT ignore(and(x1,x2,x3))
+0.0823	0.0756	-0.082	[0.009,0.016,0.122,0.17]	website	SELECT URL, count() AS PageViews FROM hits_100m_single WHERE CounterID = 34 AND EventDate >= \'2013-07-01\' AND EventDate <= \'2013-07-31\' AND NOT DontCountHits AND NOT Refresh AND notEmpty(URL) GROUP BY URL ORDER BY PageViews DESC LIMIT 10
+0.3975	0.4041	0.016	[0.012,0.04,0.114,0.138]	select_format	INSERT INTO table_RowBinary SELECT * FROM test.hits LIMIT 100000
+0.1018	0.104	0.021	[0.018,0.055,0.109,0.131]	cpu_synthetic	SELECT quantilesExactIf(0.5, 0.9)(SendTiming, SendTiming > 0) FROM hits_100m_single
+0.1621	0.1585	-0.023	[0.022,0.051,0.108,0.117]	cryptographic_hashes	SELECT ignore(SHA1(materialize(\'\'))) FROM numbers(1000000) FORMAT Null
+0.0736	0.0762	0.035	[0.012,0.051,0.106,0.123]	trim_whitespace	SELECT replaceRegexpOne(value, \' *$\', \'\') FROM whitespaces LIMIT 10000000 FORMAT Null
+0.3204	0.2889	-0.099	[0.025,0.052,0.098,0.231]	logical_functions_medium	SELECT count() FROM test_logical_functions._4_1_Mixed WHERE NOT ignore(xor(x1,x2,x3,x4))
+0.1357	0.1331	-0.02	[0.001,0.018,0.095,0.11]	random_printable_ascii	SELECT count() FROM zeros(1000000) WHERE NOT ignore(randomPrintableASCII(100))
+0.0337	0.0328	-0.027	[0.024,0.029,0.095,0.13]	entropy	SELECT entropy(URLDomain) FROM test.hits
+0.9315	0.8204	-0.12	[0.046,0.052,0.091,0.102]	joins_in_memory	SELECT COUNT() FROM ints l LEFT JOIN ints r USING i64 WHERE i32 = 200042
+0.065	0.0565	-0.131	[0.006,0.031,0.088,0.114]	parse_engine_file	SELECT * FROM table_TabSeparated FORMAT Null
+0.0291	0.029	-0.004	[0.001,0.023,0.088,0.105]	codecs_float_insert	INSERT INTO codec_rnd_Float64_ZSTD (n) SELECT (intHash64(number) - 4294967295)/pi() FROM system.numbers LIMIT 1000000 SETTINGS max_threads=1
+0.1065	0.1014	-0.048	[0.025,0.057,0.087,0.119]	trim_whitespace	SELECT replaceRegexpAll(value, \'^ *| *$\', \'\') FROM whitespaces LIMIT 10000000 FORMAT Null
+0.1764	0.1896	0.074	[0.008,0.033,0.085,0.106]	cryptographic_hashes	SELECT ignore(MD5(materialize(\'\'))) FROM numbers(1000000) FORMAT Null
+0.0593	0.0608	0.025	[0,0.021,0.083,0.102]	website	SELECT UserID, SearchPhrase, count() FROM hits_10m_single GROUP BY UserID, SearchPhrase LIMIT 10
+0.5535	0.5119	-0.076	[0.009,0.036,0.083,0.1]	cryptographic_hashes	SELECT ignore(SHA224(materialize(\'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sollicitudin nisi ac erat mollis dapibus. Maecenas leo purus, bibendum eu erat eget, iaculis molestie tortor. Phasellus maximus odio nec mauris ultrices dictum. Morbi efficitur nisl eget congue mollis. Vestibulum pharetra diam vitae urna interdum, eget ultricies justo sollicitudin. Nunc sit amet purus id leo tempus dignissim. Donec ac lacus ut orci tempus scelerisque quis ultricies nibh. Nullam lobortis, erat ac ullamcorper interdum, odio nisl elementum quam, ut malesuada massa nunc eget quam. Nam suscipit neque quis sapien ultricies imperdiet. Maecenas augue libero, finibus tristique sagittis et, semper nec arcu. Morbi non tortor ultrices, sollicitudin justo sed, accumsan ligula. Nullam at ipsum in nibh auctor ullamcorper. Nullam laoreet neque id lorem condimentum tincidunt. Nullam vel orci nibh. Ut sit amet sem faucibus, fringilla orci at, lacinia enim. Mauris imperdiet ex id scelerisque eleifend. Ut tincidunt massa nibh, viverra pharetra metus\'))) FROM zeros_mt(1000000) FORMAT Null
+0.0338	0.0359	0.062	[0.047,0.06,0.082,0.106]	linear_regression	SELECT stochasticLinearRegressionState(0.0001, 0, 15)(Age, Income, ParamPrice, Robotness, RefererHash) FROM test.hits FORMAT Null
+0.1391	0.1431	0.028	[0.008,0.035,0.082,0.126]	codecs_int_insert	INSERT INTO codec_mon_UInt64_NONE (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.1403	0.133	-0.053	[0.009,0.023,0.08,0.107]	order_by_read_in_order	SELECT * FROM hits_100m_single ORDER BY CounterID, EventDate LIMIT 100
+0.2314	0.2322	0.003	[0.003,0.031,0.08,0.103]	arithmetic	SELECT count() FROM nums WHERE NOT ignore(\n        intDivOrZero(i8, i8),\n        intDivOrZero(i8, i8 + 1),\n        intDivOrZero(i8, i8 + 2),\n        intDivOrZero(i8, i8 + 3),\n        intDivOrZero(i8, i8 + 4),\n        intDivOrZero(i8, i8 + 5),\n        intDivOrZero(i8, i8 + 6),\n        intDivOrZero(i8, i8 + 7)\n        )
+0.1773	0.1799	0.014	[0.008,0.025,0.079,0.11]	cryptographic_hashes	SELECT ignore(MD5(toString(1000000000+number))) FROM numbers(1000000) FORMAT Null
+0.1413	0.1433	0.014	[0.002,0.014,0.078,0.119]	codecs_int_insert	INSERT INTO codec_mon_UInt64_Delta (n) SELECT number*512+(intHash64(number)%512) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.2723	0.2508	-0.079	[0.022,0.043,0.075,0.246]	logical_functions_small	SELECT count() FROM test_logical_functions._2_0_UInt8 WHERE NOT ignore(or(x1,x2))
+0.1571	0.1585	0.008	[0.008,0.026,0.075,0.119]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_T64 (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0308	0.0286	-0.072	[0.029,0.047,0.071,0.177]	set_index	SELECT count() FROM test_in WHERE a IN (SELECT rand(1) FROM numbers(100000)) SETTINGS max_rows_to_read = 1, read_overflow_mode = \'break\'
+0.1189	0.1167	-0.019	[0.005,0.015,0.066,0.105]	codecs_int_insert	INSERT INTO codec_rnd_UInt64_Delta (n) SELECT intHash64(number) FROM system.numbers LIMIT 10000000 SETTINGS max_threads=1
+0.0793	0.0741	-0.066	[0.012,0.036,0.052,0.101]	parse_engine_file	SELECT * FROM table_Native FORMAT Null
+0.2576	0.2548	-0.011	[0.003,0.012,0.046,0.127]	logical_functions_small	SELECT count() FROM test_logical_functions._2_1_UInt8 WHERE NOT ignore(or(x1,x2))

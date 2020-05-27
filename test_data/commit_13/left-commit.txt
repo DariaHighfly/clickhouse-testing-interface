@@ -1,0 +1,5 @@
+commit 0afd36193387fcb7e8d57a1a8d0160d1859a5f91
+Author: alesapin <alesapin@gmail.com>
+Date:   Mon Apr 20 17:19:55 2020 +0300
+
+    Fix subprocess call in clickhouse-test

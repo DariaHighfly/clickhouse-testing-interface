@@ -1,0 +1,8 @@
+commit 2c8576798ba0f3e464f9798434985b39dc576466
+Merge: c4758b69 3d4696d4
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Mon Apr 20 23:36:02 2020 +0300
+
+    Merge pull request #10354 from oandrew/avro-nested
+    
+    Avro nested fields insert support

@@ -1,0 +1,13 @@
+commit 672c952d39786fa1a97865e2df01baec8bd762ba (pr/head)
+Author: Alexander Kuzmenkov <36882414+akuzm@users.noreply.github.com>
+Date:   Mon Apr 20 17:44:21 2020 +0300
+
+    Update test.py
+
+Real tested commit is:
+commit 47a7c0baf416055d9d753d36cb98544992ec93c5 (pr/merge)
+Merge: 9d83a9dc 672c952d
+Author: Alexander Kuzmenkov <36882414+akuzm@users.noreply.github.com>
+Date:   Mon Apr 20 18:32:41 2020 +0300
+
+    Merge 672c952d39786fa1a97865e2df01baec8bd762ba into 9d83a9dc3d6d762d306295a81d9ee33997ffa369

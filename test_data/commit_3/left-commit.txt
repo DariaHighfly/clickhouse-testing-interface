@@ -1,0 +1,8 @@
+commit 4ecc86becab4570e9bff67075f650e688da2e7d5
+Merge: d94fc263 da7eeb31
+Author: alexey-milovidov <milovidov@yandex-team.ru>
+Date:   Tue Apr 21 02:30:17 2020 +0300
+
+    Merge pull request #9950 from ClickHouse/aku/literal-columns
+    
+    Create unique columns for literals
