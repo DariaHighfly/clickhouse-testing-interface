@@ -1,6 +1,6 @@
 <template>
     <div class="column-chart">
-        <p class="column-chart__title">TIME PERFORMANCE OF ALL TESTS</p>
+        <p class="column-chart__title">TIME PERFORMANCE OF All TESTS</p>
         <div class="params">
             <div class="params_box">
                 <p class="params__title">
@@ -12,18 +12,17 @@
                     <button class="params__input-box__button button-right" v-on:click="changeThreshold(1)">+</button>
                 </div>
             </div>
-            <!-- TO DO INTERVAL-->
-            <!--<div class="params_box">-->
-            <!--<p class="params__title">-->
-            <!--Percentile:-->
-            <!--</p>-->
-            <!--<div class="params__radio">-->
-            <!--<div class="params__radio_column" v-for="value in Object.keys(criticalValues)">-->
-            <!--<input type="radio" :id="value" :value="value" v-model="picked">-->
-            <!--<label :for="value">{{value}} %</label>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
+            <div class="params_box">
+                <p class="params__title">
+                    Percentile:
+                </p>
+                <div class="params__radio">
+                    <div class="params__radio_column" v-for="value in Object.keys(criticalValues)">
+                        <input type="radio" :id="value" :value="value" v-model="picked">
+                        <label :for="value">{{value}} %</label>
+                    </div>
+                </div>
+            </div>
         </div>
         <highcharts :options="timeColumnChartOptions"></highcharts>
     </div>
@@ -56,43 +55,6 @@
                 return this.testNames;
             },
             series() {
-                // let data = [];
-                // let avgTime = [];
-                // let points = [];
-                // for (let key in this.timePerformance) {
-                //     // Average of time difference
-                //     for (let i = 0; i !== this.timePerformance[key].length; ++i) {
-                //         let ratio = [];
-                //         for (let j = 0; j !== this.timePerformance[key][i].newTime.length; ++j) {
-                //             ratio.push(this.timePerformance[key][i].newTime[j] / this.timePerformance[key][i].oldTime[j]);
-                //         }
-                //         let avg = Math.pow(ratio.reduce((result, currentRatio) => {
-                //             return result *= currentRatio}), 1/ratio.length);
-                //         if (Math.abs(avg - 1) > this.minimumThreshold) {
-                //             data.push({ name: key, value: avg - 1, points: ratio.map(elem => (elem - 1))});
-                //         }
-                //         // if ((avg - 1) < 0) {
-                //         //     if (Math.abs(-1/(avg + 1) + 1) > this.minimumThreshold) {
-                //         //         data.push({ name: key, value: (-1/(avg + 1) + 1), points: ratio.map(elem => (elem - 1))});
-                //         //     }
-                //         // } else {
-                //         //     if ((avg - 1) > this.minimumThreshold) {
-                //         //         data.push({ name: key, value: avg - 1, points: ratio.map(elem => (elem - 1))});
-                //         //     }
-                //         // }
-                //     }
-                // }
-                // data.sort((a, b) => {
-                //     return (a.value - b.value);
-                // });
-                // data.map(elem => avgTime.push(parseFloat(elem.value)).toFixed(4));
-                // data.map(elem => {
-                //     points.push([Math.min(...elem.points), Math.max(...elem.points)])
-                // });
-                // this.testNames = [];
-                // data.map(elem => this.testNames.push(elem.name));
-
-
                 let data = {};
                 let avgTime = [];
                 let errorIntervals = [];
@@ -103,26 +65,11 @@
                             ratio.push(this.timePerformance[key][i].newTime[j] / this.timePerformance[key][i].oldTime[j]);
                         }
                         let avg = Math.pow(ratio.reduce((result, currentRatio) => {
-                            return result *= currentRatio
-                        }), 1 / ratio.length);
+                            return result *= currentRatio}), 1 / ratio.length);
                         if (!(data.hasOwnProperty(key))) {
                             data[key] = [];
                         }
                         data[key].push(avg);
-
-                        // TO DO INTERVAL
-
-                        // let n = ratio.length;
-                        // let mean = Number(parseFloat((ratio.reduce((previousValue, currentValue) => {
-                        //     return previousValue += currentValue}) / n).toFixed(4)));
-                        // let variance = ratio.reduce((previousValue, currentValue) => {
-                        //     return previousValue += Math.pow(currentValue - mean, 2);
-                        // }) / n;
-                        // let confidenceInterval = this.criticalValues[this.picked] * (variance / Math.sqrt(n));
-                        // errorIntervals.push([
-                        //     Number(parseFloat(mean - confidenceInterval).toFixed(4)),
-                        //     Number(parseFloat(mean + confidenceInterval).toFixed(4))]
-                        // );
                     }
                 }
                 let dataToArray = [];
@@ -132,16 +79,24 @@
                     }), 1 / data[key].length);
                     if (Math.abs(avg - 1) > this.minimumThreshold) {
                         // data.push({ name: key, value: avg - 1, points: ratio.map(elem => (elem - 1))});
-                        dataToArray.push({name: key, value: avg - 1})
+                        dataToArray.push({name: key, value: avg - 1, points: data[key].map(elem => (elem - 1))})
                     }
                 }
                 dataToArray.sort((a, b) => {
                     return (a.value - b.value);
                 });
                 dataToArray.map(elem => avgTime.push(parseFloat(elem.value)).toFixed(4));
-                // data.map(elem => {
-                //     points.push([Math.min(...elem.points), Math.max(...elem.points)])
-                // });
+                dataToArray.map(elem => {
+                    let n = elem.points.length;
+                    let mean = Number(parseFloat((elem.points.reduce((previousValue, currentValue) => {
+                        return previousValue += currentValue}) / n).toFixed(4)));
+                    let variance = elem.points.reduce((previousValue, currentValue) => {
+                        return previousValue += Math.pow(currentValue - mean, 2);
+                    }) / n;
+                    let confidenceInterval = this.criticalValues[this.picked] * (variance / Math.sqrt(n));
+                    errorIntervals.push([Number(parseFloat(mean - confidenceInterval).toFixed(4)),
+                        Number(parseFloat(mean + confidenceInterval).toFixed(4))]);
+                });
                 this.testNames = [];
                 dataToArray.map(elem => this.testNames.push(elem.name));
 
@@ -157,17 +112,15 @@
                             pointFormat: 'Time has changed by: <b>{point.y} s</b><br/>'
                         },
                     },
-                    // TO DO INTERVAL
-
-                    // {
-                    //     name: "Time ratio",
-                    //     type: 'errorbar',
-                    //     data: errorIntervals,
-                    //     color: "#000000",
-                    //     tooltip: {
-                    //         pointFormat: 'Error range: <b>{point.low}-{point.high} s</b><br/>'
-                    //     }
-                    // },
+                    {
+                        name: "Time ratio",
+                        type: 'errorbar',
+                        data: errorIntervals,
+                        color: "#000000",
+                        tooltip: {
+                            pointFormat: 'Error range: <b>{point.low}-{point.high} s</b><br/>'
+                        }
+                    },
                 ];
             },
             timeColumnChartOptions() {
