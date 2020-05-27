@@ -21,11 +21,16 @@
                 :allTestsHistory="allTestsHistory">
             </HistoryTestsColumnChart>
         </div>
-        <!--<div class="row">-->
-            <!--<TimePerformanceColumnChart-->
-                <!--:timePerformance="timePerformance">-->
-            <!--</TimePerformanceColumnChart>-->
-        <!--</div>-->
+        <div class="row">
+            <TimePerformanceColumnChart
+                :timePerformance="timePerformance">
+            </TimePerformanceColumnChart>
+        </div>
+        <div class="row">
+            <TimePerformanceAllQueries
+                :timePerformance="timePerformance">
+            </TimePerformanceAllQueries>
+        </div>
         <div class="row">
             <UnstableTestsChart
                 :unstableQueries="unstableQueries">
@@ -44,6 +49,7 @@
     import Title from "./Title"
     import HistoryTestsColumnChart from "./HistoryTestsColumnChart"
     import TimePerformanceColumnChart from "./TimePerformanceColumnChart"
+    import TimePerformanceAllQueries from "./TimePerformanceAllQueries"
     import PieChart from "./PieChart"
     import TestStatistics from "./TestStatistics"
     import AllTestsTimeSpline from "./AllTestsTimeSpline"
@@ -58,6 +64,7 @@
             PieChart,
             TestStatistics,
             TimePerformanceColumnChart,
+            TimePerformanceAllQueries,
             AllTestsTimeSpline,
             UnstableTestsChart
         },

@@ -1,29 +1,15 @@
 <template>
     <div class="column-chart">
-        <p class="column-chart__title">TIME PERFORMANCE OF All TESTS</p>
+        <p class="column-chart__title">TIME PERFORMANCE OF All TESTS' QUERIES</p>
         <div class="params">
-            <div class="params_box">
-                <p class="params__title">
-                    Minimum Threshold (abs):
-                </p>
-                <div class="params__input-box">
-                    <button class="params__input-box__button button-left" v-on:click="changeThreshold(0)">-</button>
-                    <input class="params__input-box__input" type="number" v-model="minimumThreshold" :min="0" :max="10000" step="0.001">
-                    <button class="params__input-box__button button-right" v-on:click="changeThreshold(1)">+</button>
-                </div>
+            <p class="params__title">
+                Minimum Threshold (abs):
+            </p>
+            <div class="params__input-box">
+                <button class="params__input-box__button button-left" v-on:click="changeThreshold(0)">-</button>
+                <input class="params__input-box__input" type="number" v-model="minimumThreshold" :min="0" :max="10000" step="0.01">
+                <button class="params__input-box__button button-right" v-on:click="changeThreshold(1)">+</button>
             </div>
-            <!-- TO DO INTERVAL-->
-            <!--<div class="params_box">-->
-            <!--<p class="params__title">-->
-            <!--Percentile:-->
-            <!--</p>-->
-            <!--<div class="params__radio">-->
-            <!--<div class="params__radio_column" v-for="value in Object.keys(criticalValues)">-->
-            <!--<input type="radio" :id="value" :value="value" v-model="picked">-->
-            <!--<label :for="value">{{value}} %</label>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
         </div>
         <highcharts :options="timeColumnChartOptions"></highcharts>
     </div>
@@ -31,7 +17,7 @@
 
 <script>
     export default {
-        name: "TimePerformanceColumnChart",
+        name: "TimePerformanceAllQueries",
         props: {
             timePerformance: {
                 type: Object,
@@ -41,14 +27,7 @@
         data() {
             return {
                 testNames: [],
-                minimumThreshold: 0.001,
-                picked: 5,
-                criticalValues: {
-                    5: 0.65,
-                    50: 0.68,
-                    95: 1.96,
-                    99: 2.58
-                },
+                minimumThreshold: 0.06,
             }
         },
         computed: {
@@ -56,6 +35,9 @@
                 return this.testNames;
             },
             series() {
+
+                // Variant without minus 1
+
                 // let data = [];
                 // let avgTime = [];
                 // let points = [];
@@ -64,22 +46,19 @@
                 //     for (let i = 0; i !== this.timePerformance[key].length; ++i) {
                 //         let ratio = [];
                 //         for (let j = 0; j !== this.timePerformance[key][i].newTime.length; ++j) {
-                //             ratio.push(this.timePerformance[key][i].newTime[j] / this.timePerformance[key][i].oldTime[j]);
+                //             ratio.push(this.timePerformance[key][i].oldTime[j] / this.timePerformance[key][i].newTime[j]);
                 //         }
                 //         let avg = Math.pow(ratio.reduce((result, currentRatio) => {
                 //             return result *= currentRatio}), 1/ratio.length);
-                //         if (Math.abs(avg - 1) > this.minimumThreshold) {
-                //             data.push({ name: key, value: avg - 1, points: ratio.map(elem => (elem - 1))});
+                //         if (avg < 1) {
+                //             if (Math.abs(-1/avg) > this.minimumThreshold) {
+                //                 data.push({ name: key, value: -1/avg, points: ratio.map(elem => -elem)});
+                //             }
+                //         } else {
+                //             if (avg > this.minimumThreshold) {
+                //                 data.push({ name: key, value: avg, points: ratio});
+                //             }
                 //         }
-                //         // if ((avg - 1) < 0) {
-                //         //     if (Math.abs(-1/(avg + 1) + 1) > this.minimumThreshold) {
-                //         //         data.push({ name: key, value: (-1/(avg + 1) + 1), points: ratio.map(elem => (elem - 1))});
-                //         //     }
-                //         // } else {
-                //         //     if ((avg - 1) > this.minimumThreshold) {
-                //         //         data.push({ name: key, value: avg - 1, points: ratio.map(elem => (elem - 1))});
-                //         //     }
-                //         // }
                 //     }
                 // }
                 // data.sort((a, b) => {
@@ -87,63 +66,50 @@
                 // });
                 // data.map(elem => avgTime.push(parseFloat(elem.value)).toFixed(4));
                 // data.map(elem => {
+                //     // console.log([Math.min(...elem.points), Math.max(...elem.points)]);
                 //     points.push([Math.min(...elem.points), Math.max(...elem.points)])
                 // });
+                // // console.log(points);
                 // this.testNames = [];
                 // data.map(elem => this.testNames.push(elem.name));
 
+                // Variant with minus 1
 
-                let data = {};
+                let data = [];
                 let avgTime = [];
-                let errorIntervals = [];
+                let points = [];
                 for (let key in this.timePerformance) {
+                    // Average of time difference
                     for (let i = 0; i !== this.timePerformance[key].length; ++i) {
                         let ratio = [];
                         for (let j = 0; j !== this.timePerformance[key][i].newTime.length; ++j) {
                             ratio.push(this.timePerformance[key][i].newTime[j] / this.timePerformance[key][i].oldTime[j]);
                         }
                         let avg = Math.pow(ratio.reduce((result, currentRatio) => {
-                            return result *= currentRatio
-                        }), 1 / ratio.length);
-                        if (!(data.hasOwnProperty(key))) {
-                            data[key] = [];
+                            return result *= currentRatio}), 1/ratio.length);
+                        if (Math.abs(avg - 1) > this.minimumThreshold) {
+                            data.push({ name: key, value: avg - 1, points: ratio.map(elem => (elem - 1))});
                         }
-                        data[key].push(avg);
-
-                        // TO DO INTERVAL
-
-                        // let n = ratio.length;
-                        // let mean = Number(parseFloat((ratio.reduce((previousValue, currentValue) => {
-                        //     return previousValue += currentValue}) / n).toFixed(4)));
-                        // let variance = ratio.reduce((previousValue, currentValue) => {
-                        //     return previousValue += Math.pow(currentValue - mean, 2);
-                        // }) / n;
-                        // let confidenceInterval = this.criticalValues[this.picked] * (variance / Math.sqrt(n));
-                        // errorIntervals.push([
-                        //     Number(parseFloat(mean - confidenceInterval).toFixed(4)),
-                        //     Number(parseFloat(mean + confidenceInterval).toFixed(4))]
-                        // );
+                        // if ((avg - 1) < 0) {
+                        //     if (Math.abs(-1/(avg + 1) + 1) > this.minimumThreshold) {
+                        //         data.push({ name: key, value: (-1/(avg + 1) + 1), points: ratio.map(elem => (elem - 1))});
+                        //     }
+                        // } else {
+                        //     if ((avg - 1) > this.minimumThreshold) {
+                        //         data.push({ name: key, value: avg - 1, points: ratio.map(elem => (elem - 1))});
+                        //     }
+                        // }
                     }
                 }
-                let dataToArray = [];
-                for (let key in data) {
-                    let avg = Math.pow(data[key].reduce((result, currentRatio) => {
-                        return result *= currentRatio
-                    }), 1 / data[key].length);
-                    if (Math.abs(avg - 1) > this.minimumThreshold) {
-                        // data.push({ name: key, value: avg - 1, points: ratio.map(elem => (elem - 1))});
-                        dataToArray.push({name: key, value: avg - 1})
-                    }
-                }
-                dataToArray.sort((a, b) => {
+                data.sort((a, b) => {
                     return (a.value - b.value);
                 });
-                dataToArray.map(elem => avgTime.push(parseFloat(elem.value)).toFixed(4));
-                // data.map(elem => {
-                //     points.push([Math.min(...elem.points), Math.max(...elem.points)])
-                // });
+                data.map(elem => avgTime.push(parseFloat(elem.value)).toFixed(4));
+                data.map(elem => {
+                    points.push([Math.min(...elem.points), Math.max(...elem.points)])
+                });
                 this.testNames = [];
-                dataToArray.map(elem => this.testNames.push(elem.name));
+                data.map(elem => this.testNames.push(elem.name));
 
 
                 return [
@@ -157,12 +123,10 @@
                             pointFormat: 'Time has changed by: <b>{point.y} s</b><br/>'
                         },
                     },
-                    // TO DO INTERVAL
-
                     // {
                     //     name: "Time ratio",
                     //     type: 'errorbar',
-                    //     data: errorIntervals,
+                    //     data: points,
                     //     color: "#000000",
                     //     tooltip: {
                     //         pointFormat: 'Error range: <b>{point.low}-{point.high} s</b><br/>'
@@ -229,13 +193,12 @@
         methods: {
             changeThreshold(flag) {
                 if (flag) {
-                    this.minimumThreshold = parseFloat(Number(this.minimumThreshold) + 0.001).toFixed(3);
+                    this.minimumThreshold = parseFloat(Number(this.minimumThreshold) + 0.01).toFixed(2);
                 } else {
-                    this.minimumThreshold = parseFloat(Number(this.minimumThreshold) - 0.001).toFixed(3);
+                    this.minimumThreshold = parseFloat(Number(this.minimumThreshold) - 0.01).toFixed(2);
                 }
                 this.series;
                 this.testNamesForChart;
-
             }
         },
         created() {
@@ -264,18 +227,9 @@
     }
     .params {
         display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        margin: 5px 0 30px 20px;
-    }
-    .params_box {
-        display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin: 0 0 0 20px;
-    }
-    .params_box:first-child {
-        margin-left: 0;
+        margin: 5px 0 30px 20px;
     }
     .params__input-box {
         display: flex;
@@ -315,45 +269,4 @@
         border-top-right-radius: 2px;
         border-bottom-right-radius: 2px;
     }
-    .params__radio {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        /*justify-content: center;*/
-    }
-    .params__radio_column {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-    }
-    .params__radio label {
-        font-size: 16px;
-        color: #000000;
-        margin-right: 15px;
-    }
-    input[type='radio'] {
-        -webkit-appearance: none;
-        cursor: pointer;
-        width:18px;
-        height:18px;
-        margin: 0 5px 0 0;
-        border-radius: 50%;
-        outline: none;
-        border: 2px solid #a0a0a0;
-    }
-    input[type='radio']:before {
-        content: '';
-        display: block;
-        width: 60%;
-        height: 60%;
-        margin: 20% auto;
-        border-radius: 50%;
-    }
-    input[type="radio"]:checked:before {
-        background: #98c807;
-    }
-    input[type="radio"]:checked {
-        border-color: #98c807;
-    }
-
 </style>
